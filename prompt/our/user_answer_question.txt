@@ -1,0 +1,7 @@
+Question:
+{{question}}
+
+Reference example:
+{{example}}
+
+Give a concise answer to the question.

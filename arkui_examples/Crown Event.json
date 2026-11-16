@@ -1,0 +1,12 @@
+{
+    "title": "Crown Event",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-events-crown",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to register a crown event on a component and receive event data.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct CityList {\n  @State message: string = \"onDigitalCrown\";\n  build() {\n    Column() {\n      Row() {\n        Stack() {\n          Text(this.message)\n            .fontSize(20)\n            .fontColor(Color.White)\n            .backgroundColor(\"#262626\")\n            .textAlign(TextAlign.Center)\n            .focusable(true)\n            .focusOnTouch(true)\n            .defaultFocus(true)\n            .borderWidth(2)\n            .width(223)\n            .height(223)\n            .borderRadius(110)\n            .onDigitalCrown((event: CrownEvent) => {\n              event.stopPropagation();\n              this.message = \"CrownEvent\\n\\n\" + JSON.stringify(event);\n              console.info(`action: ${event.action}, angularVelocity: ${event.angularVelocity}, degree: ${event.degree}, timestamp: ${event.timestamp}`);\n            })\n        }.width(\"100%\").height(\"100%\")\n      }.width(\"100%\").height(\"100%\")\n    }\n  }\n}"
+        }
+    ]
+}

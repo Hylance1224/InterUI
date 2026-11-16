@@ -1,0 +1,12 @@
+{
+    "title": "EmbeddedComponent",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-embedded-component",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example: Loading an EmbeddedComponent Component",
+            "description": "This example shows the basic usage of the EmbeddedComponent and EmbeddedUIExtensionAbility. The bundle name of the sample application is com.example.embeddeddemo, and the started EmbeddedUIExtensionAbility in the same application is ExampleEmbeddedAbility. This example only supports devices with multi-process permissions, such as 2-in-1 devices.\nThe EntryAbility (UIAbility) of the sample application loads the ets/pages/Index.ets file, whose content is as follows:",
+            "code": "import { Want } from '@kit.AbilityKit';\n@Entry\n@Component\nstruct Index {\n  @State message: string = 'Message: ';\n  private want: Want = {\n    bundleName: \"com.example.embeddedComponent\",\n    abilityName: \"ExampleEmbeddedAbility\",\n  };\n  build() {\n    Row() {\n      Column() {\n        Text(this.message)\n          .fontSize(20)\n          .fontWeight(FontWeight.Bold)\n        EmbeddedComponent(this.want, EmbeddedType.EMBEDDED_UI_EXTENSION)\n          .width('100%')\n          .height('90%')\n          .onTerminated((info) => {\n            // Triggered when the terminateSelfWithResult button is clicked in the extension page.\n            this.message = 'Termination: code = ' + info.code + ', want = ' + JSON.stringify(info.want);\n          })\n          .onError((error) => {\n            // Triggered on failure or exception.\n            this.message = 'Error: code = ' + error.code;\n          })\n      }\n      .width('100%')\n    }\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

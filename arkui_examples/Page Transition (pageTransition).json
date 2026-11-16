@@ -1,0 +1,27 @@
+{
+    "title": "Page Transition (pageTransition)",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-page-transition-animation",
+    "example_count": 4,
+    "examples": [
+        {
+            "title": "onEnter",
+            "description": "onEnter(event: PageTransitionCallback): PageTransitionEnterInterface\nInvoked on a per-frame basis until the entrance animation is complete, with the progress parameter changing from 0 to 1.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "pageTransition() {\n    PageTransitionEnter({ duration: 1200, curve: Curve.Linear })\n      // During the transition animation, the entrance animation has a type that represents the route type, and a progress that increases from 0 to 1.\n      .onEnter((type: RouteType, progress: number) => {\n        // Service logic\n      })\n  }"
+        },
+        {
+            "title": "onExit",
+            "description": "onExit(event: PageTransitionCallback): PageTransitionExitInterface\nInvoked on a per-frame basis until the exit animation is complete, with the progress parameter changing from 0 to 1.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nAtomic service API: This API can be used in atomic services since API version 11.\nParameters\nExample",
+            "code": "pageTransition() {\n    PageTransitionExit({ duration: 1200, curve: Curve.Linear })\n      // During the transition animation, the exit animation has a type that represents the route type, and a progress that increases from 0 to 1.\n      .onExit((type: RouteType, progress: number) => {\n        // Service logic\n      })\n  }"
+        },
+        {
+            "title": "Example 1: Configuring Entrance and Exit Animations",
+            "description": "Method 1: Configure different entrance and exit animations based on different transition types.",
+            "code": "// Index.ets\n@Entry\n@Component\nstruct Index {\n  @State scale1: number = 1;\n  @State opacity1: number = 1;\n  build() {\n    Column() {\n      // Replace $r(\"app.media.transition_image1\") with the image resource file you use.\n      Image($r(\"app.media.transition_image1\")).width('100%').height('100%')\n    }\n    .width('100%')\n    .height('100%')\n    .scale({ x: this.scale1 })\n    .opacity(this.opacity1)\n    .onClick(() => {\n      this.getUIContext().getRouter().pushUrl({ url: 'pages/Page1' });\n    })\n  }\n  pageTransition() {\n    PageTransitionEnter({ duration: 1200, curve: Curve.Linear })\n      .onEnter((type: RouteType, progress: number) => {\n        if (type == RouteType.Push || type == RouteType.Pop) {\n          this.scale1 = progress;\n          this.opacity1 = progress;\n        }\n      })\n    PageTransitionExit({ duration: 1200, curve: Curve.Ease })\n      .onExit((type: RouteType, progress: number) => {\n        if (type == RouteType.Push) {\n          this.scale1 = 1 - progress;\n          this.opacity1 = 1 - progress;\n        }\n      })\n  }\n}"
+        },
+        {
+            "title": "Example 2: Setting Translation Effects for Entrance and Exit",
+            "description": "Method 1: Configure the various entrance and exit translation effects provided, with the system language layout mode set to right-to-left (RTL).",
+            "code": "// Index.ets\n@Entry\n@Component\nstruct Index {\n  @State scale1: number = 1;\n  @State opacity1: number = 1;\n  build() {\n    Column() {\n      Button(\"Page 1\").onClick(() => {\n        this.getUIContext().getRouter().pushUrl({\n          url: \"pages/Page1\"\n        })\n      })\n        .width(200)\n        .height(60)\n        .fontSize(36)\n      Text(\"START\")\n        .fontSize(36)\n        .textAlign(TextAlign.Center)\n    }\n    .scale({ x: this.scale1 })\n    .opacity(this.opacity1)\n    .height(\"100%\")\n    .width(\"100%\")\n    .justifyContent(FlexAlign.Center)\n  }\n  // Method 2: Use the default effects provided by the system, such as translation, scaling, and opacity.\n  pageTransition() {\n    // Set the entrance animation.\n    PageTransitionEnter({ duration: 200 })\n      .slide(SlideEffect.START)\n    // Set the exit animation.\n    PageTransitionExit({ delay: 100 })\n      .slide(SlideEffect.START) //Left\n  }\n}"
+        }
+    ]
+}

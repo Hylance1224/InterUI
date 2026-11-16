@@ -1,0 +1,17 @@
+{
+    "title": "Tooltip Control",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-tips",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Binding a Tooltip",
+            "description": "This example shows how to bind a tooltip to a button using bindTips.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TipsExample {\n  build() {\n    Flex({ direction: FlexDirection.Column }) {\n      Button('Hover Tips')\n        .bindTips(\"Tips\", {\n          appearingTime: 700,\n          disappearingTime: 300,\n          appearingTimeWithContinuousOperation: 300,\n          disappearingTimeWithContinuousOperation: 0,\n          enableArrow: true,\n        })\n        .position({ x: 100, y: 250 })\n    }.width('100%').padding({ top: 5 })\n  }\n}"
+        },
+        {
+            "title": "Example 2: Displaying and Hiding Multiple Tooltips",
+            "description": "This example demonstrates how to configure multiple tooltips to appear and disappear in sequence using bindTips.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TipsExample {\n  build() {\n    Flex({ direction: FlexDirection.Column }) {\n      Button('Hover Tips')\n        .bindTips(\"Tips\", {\n          appearingTime: 700,\n          disappearingTime: 300,\n          appearingTimeWithContinuousOperation: 300,\n          disappearingTimeWithContinuousOperation: 0,\n          enableArrow: true,\n        })\n        .position({ x: 100, y: 250 })\n      Button('Hover Tips')\n        .bindTips(\"Tips\", {\n          appearingTime: 700,\n          disappearingTime: 300,\n          appearingTimeWithContinuousOperation: 300,\n          disappearingTimeWithContinuousOperation: 0,\n          enableArrow: true,\n        })\n        .position({ x: 100, y: 350 })\n    }.width('100%').padding({ top: 5 })\n  }\n}"
+        }
+    ]
+}

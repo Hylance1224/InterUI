@@ -1,0 +1,17 @@
+{
+    "title": "mutableBuilder",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-mutablebuilder",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "mutableBuilder",
+            "description": "mutableBuilder<Args extends Object[]>(builder: BuilderCallback): MutableBuilder<Args>\nmutableBuilder is a template function. It returns a MutableBuilder object and accepts only a single global @Builder function as its parameter.\nIn the returned MutableBuilder object, the builder attribute method can be used only inside custom components.\nAtomic service API: This API can be used in atomic services since API version 22.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "class TextContent {\n  text: string = '';\n}\n@Builder\nfunction textBuilder(p: TextContent) {\n  Text(p.text).margin(20)\n}\n@Builder\nfunction buttonBuilder(p: TextContent) {\n  Button(p.text).margin(20)\n}\nlet counter: number = 1;\n@Entry\n@ComponentV2\nstruct MyApp {\n  @Local message: string = 'init';\n  @Local switchingBuilder: MutableBuilder<[TextContent]> = mutableBuilder(textBuilder);\n  build() {\n    Column() {\n      this.switchingBuilder.builder({ text: this.message })\n      Button('Click to change')\n      .onClick(() => {\n        counter++; // Increment the counter on each button click to dynamically switch the global @Builder.\n        if(counter % 2 === 0) {\n          this.message += 'B';\n          this.switchingBuilder = mutableBuilder(buttonBuilder); // textBuilder--->buttonBuilder\n        } else {\n          this.message += 'T';\n          this.switchingBuilder = mutableBuilder(textBuilder); // buttonBuilder--->textBuilder\n        }\n      })\n    }.position({x: 120, y: 60})\n  }\n}"
+        },
+        {
+            "title": "BuilderCallback",
+            "description": "type BuilderCallback = (...args: Args) => void\nDefines the input parameter type for the mutableBuilder function, representing a global @Builder function.\nAtomic service API: This API can be used in atomic services since API version 22.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "@Builder\nfunction MyBuilder(value: string, size: number) {\n  Text(value)\n    .fontSize(size)\n}\nlet builderVar: MutableBuilder<[string, number]> = mutableBuilder(MyBuilder); // Declare builderVar as type MutableBuilder."
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "title": "ArcSlider",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ohos-arkui-advanced-arcslider",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates the basic usage of the ArcSlider component, supported since API version 18.",
+            "code": "// xxx.ets\nimport {\n  ArcSlider,\n  ArcSliderPosition,\n  ArcSliderOptions,\n  ArcSliderValueOptions,\n  ArcSliderLayoutOptions,\n  ArcSliderStyleOptions,\n  ArcSliderValueOptionsConstructorOptions,\n  ArcSliderLayoutOptionsConstructorOptions,\n  ArcSliderStyleOptionsConstructorOptions,\n  ArcSliderOptionsConstructorOptions\n} from '@kit.ArkUI';\n@Entry\n@ComponentV2\nstruct ArcSliderExample {\n  valueOptionsConstructorOptions: ArcSliderValueOptionsConstructorOptions = {\n    progress: 60,\n    min: 10,\n    max: 110\n  };\n  layoutOptionsConstructorOptions: ArcSliderLayoutOptionsConstructorOptions = {\n    reverse: true,\n    position: ArcSliderPosition.RIGHT\n  };\n  styleOptionsConstructorOptions: ArcSliderStyleOptionsConstructorOptions = {\n    trackThickness: 8,\n    activeTrackThickness: 30,\n    trackColor: '#ffd5d5d5',\n    selectedColor: '#ff2787d9',\n    trackBlur: 20\n  };\n  valueOptions: ArcSliderValueOptions = new ArcSliderValueOptions(this.valueOptionsConstructorOptions);\n  layoutOptions: ArcSliderLayoutOptions = new ArcSliderLayoutOptions(this.layoutOptionsConstructorOptions);\n  styleOptions: ArcSliderStyleOptions = new ArcSliderStyleOptions(this.styleOptionsConstructorOptions);\n  arcSliderOptionsConstructorOptions: ArcSliderOptionsConstructorOptions = {\n    valueOptions: this.valueOptions,\n    layoutOptions: this.layoutOptions,\n    styleOptions: this.styleOptions,\n    digitalCrownSensitivity:CrownSensitivity.LOW,\n    onTouch: (event: TouchEvent) => {\n    },\n    onChange: (progress: number) => {\n    },\n    onEnlarge: (isEnlarged: boolean) => {\n    }\n  };\n  arcSliderOptions: ArcSliderOptions = new ArcSliderOptions(this.arcSliderOptionsConstructorOptions);\n  build() {\n    Column() {\n      ArcSlider({ options: this.arcSliderOptions })}\n      .width('100%')\n  }\n}"
+        }
+    ]
+}

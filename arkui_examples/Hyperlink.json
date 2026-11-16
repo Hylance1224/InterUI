@@ -1,0 +1,12 @@
+{
+    "title": "Hyperlink",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-hyperlink",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example shows how to create hyperlinks with both images and text that can be clicked to navigate to a specified URL.",
+            "code": "@Entry\n@Component\nstruct HyperlinkExample {\n  build() {\n    Column() {\n      Column() {\n        Hyperlink('https://example.com/') {\n          // Replace $r('app.media.bg') with the image resource file you use.\n          Image($r('app.media.bg'))\n            .width(200)\n            .height(100)\n        }\n      }\n      Column() {\n        Hyperlink('https://example.com/', 'Go to the developer website') {\n        }\n        .color(Color.Blue)\n      }\n    }.width('100%').height('100%').justifyContent(FlexAlign.Center)\n  }\n}"
+        }
+    ]
+}

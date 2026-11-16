@@ -1,0 +1,12 @@
+{
+    "title": "Keyframe Animation (keyframeAnimateTo)",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-keyframeanimateto",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to set the keyframe animation using keyframeAnimateTo.",
+            "code": "// xxx.ets\nimport { UIContext } from '@kit.ArkUI';\n@Entry\n@Component\nstruct KeyframeDemo {\n  @State myScale: number = 1.0;\n  uiContext: UIContext | undefined = undefined;\n  aboutToAppear() {\n    this.uiContext = this.getUIContext?.();\n  }\n  build() {\n    Column() {\n      Circle()\n        .width(100)\n        .height(100)\n        .fill(\"#46B1E3\")\n        .margin(100)\n        .scale({ x: this.myScale, y: this.myScale })\n        .onClick(() => {\n          if (!this.uiContext) {\n            console.info(\"no uiContext, keyframe failed\");\n            return;\n          }\n          this.myScale = 1;\n          // Set the keyframe animation to play three times.\n          this.uiContext.keyframeAnimateTo({\n              iterations: 3,\n              expectedFrameRateRange: {\n                min: 10,\n                max: 120,\n                expected: 60,\n              }\n            }, [\n            {\n              // The first keyframe animation lasts for 800 ms, during which the scale attribute changes from 1 to 1.5.\n              duration: 800,\n              event: () => {\n                this.myScale = 1.5;\n              }\n            },\n            {\n              // The second keyframe animation lasts for 500 ms, during which the scale attribute changes from 1.5 to 1.\n              duration: 500,\n              event: () => {\n                this.myScale = 1;\n              }\n            }\n          ]);\n        })\n    }.width('100%').margin({ top: 5 })\n  }\n}"
+        }
+    ]
+}

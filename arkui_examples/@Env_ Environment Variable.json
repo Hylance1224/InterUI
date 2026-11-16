@@ -1,0 +1,12 @@
+{
+    "title": "@Env: Environment Variable",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-env-system-property",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "@Env",
+            "description": "Env: EnvDecorator\nAtomic service API: This API can be used in atomic services since API version 22.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nExample",
+            "code": "import { uiObserver } from '@kit.ArkUI';\n@Entry\n@Component\nstruct Index {\n  // @Env reads system environment variables.\n  @Env(SystemProperties.BREAK_POINT) breakpoint: uiObserver.WindowSizeLayoutBreakpointInfo;\n  build() {}\n}"
+        }
+    ]
+}

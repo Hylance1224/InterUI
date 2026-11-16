@@ -1,0 +1,17 @@
+{
+    "title": "TapGesture",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-gestures-tapgesture",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Implementing Double-Tap Gesture Recognition",
+            "description": "This example demonstrates the recognition of a double-tap gesture using TapGesture.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TapGestureExample {\n  @State value: string = '';\n  build() {\n    Column() {\n      // The gesture event is triggered by double-tapping.\n      Text('Click twice').fontSize(28)\n        .gesture(\n        TapGesture({ count: 2 })\n          .onAction((event: GestureEvent) => {\n            if (event) {\n              this.value = JSON.stringify(event.fingerList[0])\n            }\n          })\n        )\n      Text(this.value)\n    }\n    .height(300)\n    .width(300)\n    .padding(20)\n    .border({ width: 3 })\n    .margin(30)\n  }\n}"
+        },
+        {
+            "title": "Example 2: Obtaining Coordinates of a Single-Tap Gesture",
+            "description": "This example demonstrates how to obtain the coordinates of a single-tap gesture using TapGesture.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TapGestureExample {\n  build() {\n    Column() {\n      Text('Click Once').fontSize(28)\n        .gesture(\n          TapGesture({ count: 1, fingers: 1 })\n            .onAction((event: GestureEvent | undefined) => {\n              if (event) {\n                console.info(`x = ${JSON.stringify(event.tapLocation?.x)}`)\n                console.info(`y = ${JSON.stringify(event.tapLocation?.y)}`)\n                console.info(`windowX = ${JSON.stringify(event.tapLocation?.windowX)}`)\n                console.info(`windowY = ${JSON.stringify(event.tapLocation?.windowY)}`)\n                console.info(`displayX = ${JSON.stringify(event.tapLocation?.displayX)}`)\n                console.info(`displayY = ${JSON.stringify(event.tapLocation?.displayY)}`)\n                // The globalDisplayX and globalDisplayY attributes are added since API version 23.\n                console.info(`globalDisplayX = ${JSON.stringify(event.tapLocation?.globalDisplayX)}`)\n                console.info(`globalDisplayY = ${JSON.stringify(event.tapLocation?.globalDisplayY)}`)\n              }\n            })\n        )\n    }\n    .height(200)\n    .width(300)\n    .padding(20)\n    .border({ width: 3 })\n    .margin(30)\n  }\n}"
+        }
+    ]
+}

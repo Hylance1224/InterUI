@@ -1,0 +1,12 @@
+{
+    "title": "Axis Event",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-events-axis",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example shows how to set up an axis event on a button. When the user scrolls the mouse wheel over the button, the event parameters are captured and displayed. Starting from API version 21, this example uses axisPinch and getPinchAxisScaleValue to obtain the two-finger pinch scale ratio. Starting from API version 22, this example uses hasAxis to determine whether the axis event contains the specified axis type.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct AxisEventExample {\n  @State text: string = ''\n  build() {\n    Column() {\n      Row({ space: 20 }) {\n        Button('AxisEvent').width(100).height(40)\n          .onAxisEvent((event?: AxisEvent) => {\n            if (event) {\n              this.text =\n                'AxisEvent:' + '\\n  action:' + event.action + '\\n  displayX:' + event.displayX + '\\n  displayY:' +\n                event.displayY + '\\n  windowX:' + event.windowX + '\\n  windowY:' + event.windowY + '\\n  x:' + event.x +\n                  '\\n  y:' + event.y + '\\n VerticalAxisValue:' + event.getVerticalAxisValue() +\n                  '\\n HorizontalAxisValue:' + event.getHorizontalAxisValue() + '\\n axisPinch:' + event.axisPinch +\n                  '\\n PinchAxisScaleValue:' + event.getPinchAxisScaleValue() +\n                  '\\n HasAxis:' + event.hasAxis(AxisType.VERTICAL_AXIS);\n            }\n          })\n      }.margin(20)\n      Text(this.text).margin(15)\n    }.width('100%')\n  }\n}"
+        }
+    ]
+}

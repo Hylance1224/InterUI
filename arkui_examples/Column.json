@@ -1,0 +1,17 @@
+{
+    "title": "Column",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-column",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Setting the Layout Attributes of the Column Component",
+            "description": "This example demonstrates how to set the layout attributes of the Column component, such as the spacing and alignment mode and its effect.",
+            "code": "// resources/base/element/string.json\n{\n  \"string\": [\n    {\n      \"name\": \"stringSpace\",\n      \"value\": \"5\"\n    }\n  ]\n}"
+        },
+        {
+            "title": "Example 2: Configuring the Reverse Attribute",
+            "description": "This example demonstrates how to set the reverse attribute of the Column component and its effect.",
+            "code": "@Entry\n@Component\nstruct ColumnReverseSample {\n  build() {\n    Column() {\n      Text(\"1\")\n        .width(50)\n        .height(100)\n        .backgroundColor(0xAFEEEE)\n      Text(\"2\")\n        .width(50)\n        .height(100)\n        .backgroundColor(0x00FFFF)\n    }\n    .height(300)\n    .width(100)\n    .border({ width: 1 })\n    .reverse(true)\n  }\n}"
+        }
+    ]
+}

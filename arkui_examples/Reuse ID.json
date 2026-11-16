@@ -1,0 +1,12 @@
+{
+    "title": "Reuse ID",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-reuse-id",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to use reuseId to identify the reuse group of a custom component.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct MyComponent {\n  @State switch: boolean = true;\n  private type: string = \"type1\";\n  build() {\n    Column() {\n      Button(\"ChangeType\")\n        .onClick(() => {\n          this.type = \"type2\"\n        })\n      Button(\"Switch\")\n        .onClick(() => {\n          this.switch = !this.switch\n        })\n      if (this.switch) {\n        ReusableChildComponent({ type: this.type })\n          .reuseId(this.type)\n      }\n    }\n    .width('100%')\n    .height('100%')\n  }\n}\n@Reusable\n@Component\nstruct ReusableChildComponent {\n  @State type: string = ''\n  aboutToAppear() {\n    console.info(`ReusableChildComponent Appear ${this.type}`)\n  }\n  aboutToReuse(params: ESObject) {\n    console.info(`ReusableChildComponent Reuse ${this.type}`)\n    this.type = params.type;\n  }\n  build() {\n    Row() {\n      Text(this.type)\n        .fontSize(20)\n        .margin({ left: 10 })\n    }.margin({ left: 10, right: 10 })\n  }\n}"
+        }
+    ]
+}

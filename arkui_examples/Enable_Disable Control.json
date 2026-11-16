@@ -1,0 +1,12 @@
+{
+    "title": "Enable/Disable Control",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-enable",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to use enabled to set whether a button responds to user interactions.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct EnabledExample {\n  build() {\n    Flex({ justifyContent: FlexAlign.SpaceAround }) {\n      // The button does not respond to clicks.\n      Button('disable').enabled(false).backgroundColor(0x317aff).opacity(0.4)\n      Button('enable').backgroundColor(0x317aff)\n    }\n    .width('100%')\n    .padding({ top: 5 })\n  }\n}"
+        }
+    ]
+}

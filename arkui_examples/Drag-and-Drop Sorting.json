@@ -1,0 +1,17 @@
+{
+    "title": "Drag-and-Drop Sorting",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-drag-sorting",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Using onMove for Drag and Drop Operations",
+            "description": "This example demonstrates how to use onMove for drag and drop with ForEach in a List component.",
+            "code": "@Entry\n@Component\nstruct ForEachSort {\n  @State arr: Array<string> = [];\n  build() {\n    Row() {\n      List() {\n        ForEach(this.arr, (item: string) => {\n          ListItem() {\n            Text(item.toString())\n              .fontSize(16)\n              .textAlign(TextAlign.Center)\n              .size({height: 100, width: '100%'})\n          }.margin(10)\n          .borderRadius(10)\n          .backgroundColor('#FFFFFFFF')\n        }, (item: string) => item)\n          .onMove((from:number, to:number) => {\n            let tmp = this.arr.splice(from, 1);\n            this.arr.splice(to, 0, tmp[0]);\n          })\n      }\n      .width('100%')\n      .height('100%')\n      .backgroundColor('#FFDCDCDC')\n    }\n  }\n  aboutToAppear(): void {\n    for (let i = 0; i < 100; i++) {\n      this.arr.push(i.toString());\n    }\n  }\n}"
+        },
+        {
+            "title": "Example 2: Using onMove with Drag Event Callbacks",
+            "description": "This example demonstrates how to use onMove with additional drag event callbacks in a List component containing ForEach, available since API version 20.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct ListOnMoveExample {\n  private arr: number[] = [0, 1, 2, 3, 4, 5, 6];\n  build() {\n    Column() {\n      List({ space: 20, initialIndex: 0 }) {\n        ForEach(this.arr, (item: number) => {\n          ListItem() {\n            Text('First list' + item)\n              .width('100%')\n              .height(80)\n              .fontSize(16)\n              .textAlign(TextAlign.Center)\n              .borderRadius(10)\n              .backgroundColor(0xFFFFFF)\n          }\n        }, (item: string) => item)\n          .onMove((from: number, to: number) => {\n            let tmp = this.arr.splice(from, 1);\n            this.arr.splice(to, 0, tmp[0]);\n            console.info('List onMove From: ' + from);\n            console.info('List onMove To: ' + to);\n          },\n            {\n              onLongPress: (index: number) => {\n                console.info('List onLongPress: ' + index);\n              },\n              onDrop: (index: number) => {\n                console.info('List onDrop: ' + index);\n              },\n              onDragStart: (index: number) => {\n                console.info('List onDragStart: ' + index);\n              },\n              onMoveThrough: (from: number, to: number) => {\n                console.info('List onMoveThrough From: ' + from);\n                console.info('List onMoveThrough To: ' + to);\n              }\n            }\n          )\n      }.width('90%')\n      .scrollBar(BarState.Off)\n    }.width('100%').height('100%').backgroundColor(0xDCDCDC).padding({ top: 5 })\n  }\n}"
+        }
+    ]
+}

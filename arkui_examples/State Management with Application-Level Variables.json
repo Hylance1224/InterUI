@@ -1,0 +1,322 @@
+{
+    "title": "State Management with Application-Level Variables",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-state-management",
+    "example_count": 63,
+    "examples": [
+        {
+            "title": "ref12+",
+            "description": "static ref<T>(propName: string): AbstractProperty<T> | undefined\nReturns a reference to the property corresponding to propName in AppStorage. If the provided propName does not exist, this API returns undefined.\nThis API is similar to link but does not require manually releasing the returned variable of the AbstractProperty type.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet refToPropA1: AbstractProperty<number> | undefined = AppStorage.ref('PropA');\nlet refToPropA2: AbstractProperty<number> | undefined = AppStorage.ref('PropA'); // refToPropA2.get() == 47\nrefToPropA1?.set(48); // Synchronously modify AppStorage: refToPropA1.get() == refToPropA2.get() == 48."
+        },
+        {
+            "title": "setAndRef12+",
+            "description": "static setAndRef<T>(propName: string, defaultValue: T): AbstractProperty<T>\nSimilar to the ref API, returns a reference to the property corresponding to propName in AppStorage. If the given property does not exist, this API creates and initializes the property in AppStorage using defaultValue and returns its reference.\nThis API is similar to setAndLink but does not require manually releasing the returned variable of the AbstractProperty type.\nSince API version 12, AppStorage supports Map, Set, Date, null, undefined, and union types.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet ref1: AbstractProperty<number> = AppStorage.setAndRef('PropB', 49); // Create PropB with the default value 49.\nlet ref2: AbstractProperty<number> = AppStorage.setAndRef('PropA', 50); // PropA already exists with the value 47."
+        },
+        {
+            "title": "link10+",
+            "description": "static link<T>(propName: string): SubscribedAbstractProperty<T>\nEstablishes a two-way data binding with the property corresponding to propName in AppStorage. If the given property exists in AppStorage, the two-way bound data of the property in AppStorage is returned.\nAny update of the data is synchronized back to AppStorage, which then synchronizes the update to all data and custom components bound to the property.\nIf the given property does not exist in AppStorage, undefined is returned.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet linkToPropA1: SubscribedAbstractProperty<number> = AppStorage.link('PropA');\nlet linkToPropA2: SubscribedAbstractProperty<number> = AppStorage.link('PropA'); // linkToPropA2.get() == 47\nlinkToPropA1.set(48); // Two-way synchronization: linkToPropA1.get() == linkToPropA2.get() == 48"
+        },
+        {
+            "title": "setAndLink10+",
+            "description": "static setAndLink<T>(propName: string, defaultValue: T): SubscribedAbstractProperty<T>\nSimilar to the link API, establishes a two-way data binding with the property corresponding to propName in AppStorage. If the given property exists in AppStorage, this API returns the two-way bound data for the property. If the given property does not exist, this API creates and initializes the property in AppStorage using defaultValue and returns its two-way bound data.\nSince API version 12, AppStorage supports Map, Set, Date, null, undefined, and union types.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet link1: SubscribedAbstractProperty<number> = AppStorage.setAndLink('PropB', 49); // Create PropB with the default value 49.\nlet link2: SubscribedAbstractProperty<number> = AppStorage.setAndLink('PropA', 50); // PropA already exists with the value 47."
+        },
+        {
+            "title": "prop10+",
+            "description": "static prop<T>(propName: string): SubscribedAbstractProperty<T>\nEstablishes a one-way data binding with the property corresponding to propName in AppStorage. If the given property exists in AppStorage, the one-way bound data of the property in AppStorage is returned. If the given property does not exist in AppStorage, undefined is returned. Updates of the one-way bound data are not synchronized back to AppStorage.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet prop1: SubscribedAbstractProperty<number> = AppStorage.prop('PropA');\nlet prop2: SubscribedAbstractProperty<number> = AppStorage.prop('PropA');\nprop1.set(1); // One-way synchronization: prop1.get() returns 1, while prop2.get() returns 47."
+        },
+        {
+            "title": "setAndProp10+",
+            "description": "static setAndProp<T>(propName: string, defaultValue: T): SubscribedAbstractProperty<T>\nSimilar to the prop API, establishes a one-way data binding with the property corresponding to propName in AppStorage. If the given property exists in AppStorage, this API returns the one-way bound data for the property. If the given property does not exist, this API creates and initializes the property in AppStorage using defaultValue and returns its one-way bound data.\nSince API version 12, AppStorage supports Map, Set, Date, null, undefined, and union types.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet prop: SubscribedAbstractProperty<number> = AppStorage.setAndProp('PropB', 49); // PropA -> 47, PropB -> 49"
+        },
+        {
+            "title": "has10+",
+            "description": "static has(propName: string): boolean\nChecks whether the property corresponding to propName exists in AppStorage.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.has('simpleProp');"
+        },
+        {
+            "title": "get10+",
+            "description": "static get<T>(propName: string): T | undefined\nObtains the value of the property corresponding to propName from AppStorage. If the property does not exist, this API returns undefined.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet value: number = AppStorage.get('PropA') as number; // 47"
+        },
+        {
+            "title": "set10+",
+            "description": "static set<T>(propName: string, newValue: T): boolean\nSets the value of the property corresponding to propName in AppStorage. If the value of newValue is the same as the current value of the property, no assignment is performed, and the state variable does not instruct the UI to update the value of the property.\nSince API version 12, AppStorage supports Map, Set, Date, null, undefined, and union types.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 48);\nlet res: boolean = AppStorage.set('PropA', 47) // true\nlet res1: boolean = AppStorage.set('PropB', 47) // false"
+        },
+        {
+            "title": "setOrCreate10+",
+            "description": "static setOrCreate<T>(propName: string, newValue: T): void\nSets the value of the property corresponding to propName in AppStorage to a new value, if the property exists and the new value is different from the current value. If the new value is the same as the current value of the property, no assignment is performed, and the state variable does not instruct the UI to update the value of the property.\nIf the property does not exist, this API creates it with the value of newValue. This setOrCreate API can create only one AppStorage key-value pair each time. To create multiple key-value pairs, call this API multiple times.\nSince API version 12, AppStorage supports Map, Set, Date, null, undefined, and union types.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "AppStorage.setOrCreate('simpleProp', 121);"
+        },
+        {
+            "title": "delete10+",
+            "description": "static delete(propName: string): boolean\nDeletes the property corresponding to propName from AppStorage.\nThe deletion is only successful if the property has no subscribers. If there is a subscriber, the deletion fails and false is returned. If there are no subscribers, the deletion is successful and true is returned.\nThe property subscribers include the following:\nVariables decorated by @StorageLink or @StorageProp\nInstances of SubscribedAbstractProperty returned by link, prop, setAndLink, or setAndProp\nTo delete these subscribers:\nRemove the custom component containing @StorageLink or @StorageProp. For details, see Custom Component Deletion.\nCall the aboutToBeDeleted API on instances of SubscribedAbstractProperty returned by link, prop, setAndLink, or setAndProp.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nAppStorage.link<number>('PropA');\nlet res: boolean = AppStorage.delete('PropA'); // false: PropA still has subscribers.\nAppStorage.setOrCreate('PropB', 48);\nlet res1: boolean = AppStorage.delete('PropB'); // true: PropB is successfully deleted from AppStorage."
+        },
+        {
+            "title": "keys10+",
+            "description": "static keys(): IterableIterator<string>\nObtains all property names in AppStorage.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropB', 48);\nlet keys: IterableIterator<string> = AppStorage.keys();"
+        },
+        {
+            "title": "clear10+",
+            "description": "static clear(): boolean\nDeletes all properties from AppStorage. The deletion is only successful if none of the properties in AppStorage have any subscribers. If there are subscribers, this API does not take effect and false is returned. If there are no subscribers, the deletion is successful and true is returned.\nFor details about the subscriber, see delete.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet res: boolean = AppStorage.clear(); // true: There are no subscribers."
+        },
+        {
+            "title": "size10+",
+            "description": "static size(): number\nObtains the number of properties in AppStorage.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropB', 48);\nlet res: number = AppStorage.size(); // 1"
+        },
+        {
+            "title": "Link(deprecated)",
+            "description": "static Link(propName: string): any\nEstablishes a two-way data binding with the property corresponding to propName in AppStorage. If the given property exists in AppStorage, the two-way bound data of the property in AppStorage is returned.\nAny update of the data is synchronized back to AppStorage, which then synchronizes the update to all data and custom components bound to the property.\nIf the given property does not exist in AppStorage, undefined is returned.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use link instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropA', 47);\nlet linkToPropA1: SubscribedAbstractProperty<number> = AppStorage.Link('PropA');\nlet linkToPropA2: SubscribedAbstractProperty<number> = AppStorage.Link('PropA'); // linkToPropA2.get() == 47\nlinkToPropA1.set(48); // Two-way synchronization: linkToPropA1.get() == linkToPropA2.get() == 48"
+        },
+        {
+            "title": "SetAndLink(deprecated)",
+            "description": "static SetAndLink<T>(propName: string, defaultValue: T): SubscribedAbstractProperty<T>\nSimilar to the Link API, establishes a two-way data binding with the property corresponding to propName in AppStorage. If the given property exists in AppStorage, this API returns the two-way bound data for the property. If the given property does not exist, this API creates and initializes the property in AppStorage using defaultValue and returns its two-way bound data. The value of defaultValue must be of the T type and cannot be null or undefined.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use setAndLink instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropA', 47);\nlet link1: SubscribedAbstractProperty<number> = AppStorage.SetAndLink('PropB', 49); // Create PropB with the default value 49.\nlet link2: SubscribedAbstractProperty<number> = AppStorage.SetAndLink('PropA', 50); // PropA already exists with the value 47."
+        },
+        {
+            "title": "Prop(deprecated)",
+            "description": "static Prop(propName: string): any\nEstablishes a one-way data binding with the property corresponding to propName in AppStorage. If the given property exists in AppStorage, the one-way bound data of the property in AppStorage is returned. If the given property does not exist in AppStorage, undefined is returned. Updates of the one-way bound data are not synchronized back to AppStorage.\nProp supports only simple types.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use prop instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropA', 47);\nlet prop1: SubscribedAbstractProperty<number> = AppStorage.Prop('PropA');\nlet prop2: SubscribedAbstractProperty<number> = AppStorage.Prop('PropA');\nprop1.set(1); // One-way synchronization: prop1.get() returns 1, while prop2.get() returns 47."
+        },
+        {
+            "title": "SetAndProp(deprecated)",
+            "description": "static SetAndProp<S>(propName: string, defaultValue: S): SubscribedAbstractProperty<S>\nSimilar to the Prop API, establishes a one-way data binding with the property corresponding to propName in AppStorage. If the given property exists in AppStorage, this API returns the one-way bound data for the property. If the given property does not exist, this API creates and initializes the property in AppStorage using defaultValue and returns its one-way bound data. The value of defaultValue must be of the S type and cannot be null or undefined.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use setAndProp instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropA', 47);\nlet prop: SubscribedAbstractProperty<number> = AppStorage.SetAndProp('PropB', 49); // PropA -> 47, PropB -> 49"
+        },
+        {
+            "title": "Has(deprecated)",
+            "description": "static Has(propName: string): boolean\nChecks whether the property corresponding to propName exists in AppStorage.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use has instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.Has('simpleProp');"
+        },
+        {
+            "title": "Get(deprecated)",
+            "description": "static Get<T>(propName: string): T | undefined\nObtains the value of the property corresponding to propName from AppStorage. If the property does not exist, this API returns undefined.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use get instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropA', 47);\nlet value: number = AppStorage.Get('PropA') as number; // 47"
+        },
+        {
+            "title": "Set(deprecated)",
+            "description": "static Set<T>(propName: string, newValue: T): boolean\nSets the value of the property corresponding to propName in AppStorage. If the value of newValue is the same as the current value of the property, no assignment is performed, and the state variable does not instruct the UI to update the value of the property. Starting from API version 12, newValue can be null or undefined.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use set instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropA', 48);\nlet res: boolean = AppStorage.Set('PropA', 47) // true\nlet res1: boolean = AppStorage.Set('PropB', 47) // false"
+        },
+        {
+            "title": "SetOrCreate(deprecated)",
+            "description": "static SetOrCreate<T>(propName: string, newValue: T): void\nSets the value of the property corresponding to propName in AppStorage to a new value, if the property exists. If the property does not exist, this API creates it with the value of newValue.\nThe value of newValue cannot be null or undefined.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use setOrCreate instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "AppStorage.SetOrCreate('simpleProp', 121);"
+        },
+        {
+            "title": "Delete(deprecated)",
+            "description": "static Delete(propName: string): boolean\nDeletes the property corresponding to propName from AppStorage.\nThe deletion is only successful if the property has no subscribers. If there is a subscriber, the deletion fails and false is returned. If there are no subscribers, the deletion is successful and true is returned.\nSubscribers include properties bound using Link and Prop APIs, as well as those decorated with @StorageLink('propName') and @StorageProp('propName'). This means that if @StorageLink('propName') and @StorageProp('propName') are used in a custom component or if there is still a SubscribedAbstractProperty instance in a synchronization relationship with the property, the property cannot be deleted from AppStorage.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use delete instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropA', 47);\nAppStorage.Link('PropA');\nlet res: boolean = AppStorage.Delete('PropA'); // false: PropA still has subscribers.\nAppStorage.SetOrCreate('PropB', 48);\nlet res1: boolean = AppStorage.Delete('PropB'); // true: PropB is successfully deleted from AppStorage."
+        },
+        {
+            "title": "Keys(deprecated)",
+            "description": "static Keys(): IterableIterator<string>\nObtains all property names in AppStorage.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use keys instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropB', 48);\nlet keys: IterableIterator<string> = AppStorage.Keys();"
+        },
+        {
+            "title": "staticClear(deprecated)",
+            "description": "static staticClear(): boolean\nDeletes all properties.\nThis API is supported since API version 7 and deprecated since API version 9. You are advised to use clear instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "let simple = AppStorage.staticClear();"
+        },
+        {
+            "title": "Clear(deprecated)",
+            "description": "static Clear(): boolean\nDeletes all properties from AppStorage. The deletion is only successful if none of the properties in AppStorage have any subscribers. If there are subscribers, this API does not take effect and false is returned. If there are no subscribers, the deletion is successful and true is returned.\nFor details about the subscriber, see delete.\nThis API is supported since API version 9 and deprecated since API version 10. You are advised to use clear instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropA', 47);\nlet res: boolean = AppStorage.Clear(); // true: There are no subscribers."
+        },
+        {
+            "title": "IsMutable(deprecated)",
+            "description": "static IsMutable(propName: string): boolean\nChecks whether the property corresponding to propName in AppStorage is mutable.\nThis API is supported since API version 7 and deprecated since API version 10.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropA', 47);\nlet res: boolean = AppStorage.IsMutable('PropA');"
+        },
+        {
+            "title": "Size(deprecated)",
+            "description": "static Size(): number\nObtains the number of properties in AppStorage.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use size instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.SetOrCreate('PropB', 48);\nlet res: number = AppStorage.Size(); // 1"
+        },
+        {
+            "title": "constructor9+",
+            "description": "constructor(initializingProperties?: Object)\nCreates a LocalStorage instance and initializes it using the properties and values returned by Object.keys(initializingProperties).\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);"
+        },
+        {
+            "title": "has9+",
+            "description": "has(propName: string): boolean\nChecks whether the property corresponding to propName exists in LocalStorage.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nstorage.has('PropA'); // true"
+        },
+        {
+            "title": "get9+",
+            "description": "get<T>(propName: string): T | undefined\nObtains the value of the property corresponding to propName from LocalStorage.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet value: number = storage.get('PropA') as number; // 47"
+        },
+        {
+            "title": "set9+",
+            "description": "set<T>(propName: string, newValue: T): boolean\nSets the value of the property corresponding to propName in LocalStorage. If the value of newValue is the same as the current value of the property, no assignment is performed, and the state variable does not instruct the UI to update the value of the property.\nSince API version 12, LocalStorage supports Map, Set, Date, null, undefined, and union types.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet res: boolean = storage.set('PropA', 47); // true\nlet res1: boolean = storage.set('PropB', 47); // false"
+        },
+        {
+            "title": "setOrCreate9+",
+            "description": "setOrCreate<T>(propName: string, newValue: T): boolean\nSets the value of the property corresponding to propName in LocalStorage to a new value, if the property exists and the new value is different from the current value. If the new value is the same as the current value of the property, no assignment is performed, and the state variable does not instruct the UI to update the value of the property.\nIf the property does not exist, this API creates it with the value of newValue. This setOrCreate API can create only one LocalStorage key-value pair each time. To create multiple key-value pairs, call this API multiple times.\nSince API version 12, LocalStorage supports Map, Set, Date, null, undefined, and union types.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nReturns true if the property corresponding to propName exists and its value is updated to the value of newValue,\nor if propName is created with the value of newValue.\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet res: boolean = storage.setOrCreate('PropA', 121); // true\nlet res1: boolean = storage.setOrCreate('PropB', 111); // true\nlet res2: boolean = storage.setOrCreate('PropB', null); // true (API version 12 and later) or false (API version 11 and earlier)"
+        },
+        {
+            "title": "ref12+",
+            "description": "ref<T>(propName: string): AbstractProperty<T> | undefined\nReturns a reference to the property corresponding to propName in LocalStorage. If the provided propName does not exist, this API returns undefined.\nThis API is similar to link but does not require manually releasing the returned variable of the AbstractProperty type.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet refToPropA1: AbstractProperty<number> | undefined = storage.ref('PropA');\nlet refToPropA2: AbstractProperty<number> | undefined = storage.ref('PropA'); // refToPropA2.get() == 47\nrefToPropA1?.set(48); // refToPropA1.get() == refToPropA2.get() == 48"
+        },
+        {
+            "title": "setAndRef12+",
+            "description": "setAndRef<T>(propName: string, defaultValue: T): AbstractProperty<T>\nSimilar to the ref API, returns a reference to the property corresponding to propName in LocalStorage. If the given property does not exist, this API creates and initializes the property in LocalStorage using defaultValue and returns its reference.\nThis API is similar to setAndLink but does not require manually releasing the returned variable of the AbstractProperty type.\nSince API version 12, LocalStorage supports Map, Set, Date, null, undefined, and union types.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet ref1: AbstractProperty<number> = storage.setAndRef('PropB', 49); // Create PropB with the default value 49.\nlet ref2: AbstractProperty<number> = storage.setAndRef('PropA', 50); // PropA already exists with the value 47."
+        },
+        {
+            "title": "link9+",
+            "description": "link<T>(propName: string): SubscribedAbstractProperty<T>\nEstablishes a two-way data binding with the property corresponding to propName in LocalStorage. If the given property exists in LocalStorage, this API returns the two-way bound data for the property.\nAny update of the data is synchronized back to LocalStorage, which then synchronizes the update to all data and components bound to the property.\nIf the given property does not exist in LocalStorage, undefined is returned.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet linkToPropA1: SubscribedAbstractProperty<number> = storage.link('PropA');\nlet linkToPropA2: SubscribedAbstractProperty<number> = storage.link('PropA'); // linkToPropA2.get() == 47\nlinkToPropA1.set(48); // Two-way synchronization: linkToPropA1.get() == linkToPropA2.get() == 48"
+        },
+        {
+            "title": "setAndLink9+",
+            "description": "setAndLink<T>(propName: string, defaultValue: T): SubscribedAbstractProperty<T>\nSimilar to the link API, establishes a two-way data binding with the property corresponding to propName in LocalStorage. If the given property exists in LocalStorage, this API returns the two-way bound data for the property. If the given property does not exist, this API creates and initializes the property in LocalStorage using defaultValue and returns its two-way bound data.\nSince API version 12, LocalStorage supports Map, Set, Date, null, undefined, and union types.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet link1: SubscribedAbstractProperty<number> = storage.setAndLink('PropB', 49); // Create PropB with the default value 49.\nlet link2: SubscribedAbstractProperty<number> = storage.setAndLink('PropA', 50); // PropA already exists with the value 47."
+        },
+        {
+            "title": "prop9+",
+            "description": "prop<S>(propName: string): SubscribedAbstractProperty<S>\nEstablishes a one-way data binding with the property corresponding to propName in LocalStorage. If the given property exists in LocalStorage, this API returns the one-way bound data for the property. If the given property does not exist in LocalStorage, undefined is returned. Updates of the one-way bound data are not synchronized back to LocalStorage.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet prop1: SubscribedAbstractProperty<number> = storage.prop('PropA');\nlet prop2: SubscribedAbstractProperty<number> = storage.prop('PropA');\nprop1.set(1); // One-way synchronization: prop1.get() returns 1, while prop2.get() returns 47."
+        },
+        {
+            "title": "setAndProp9+",
+            "description": "setAndProp<S>(propName: string, defaultValue: S): SubscribedAbstractProperty<S>\nSimilar to the prop API, establishes a one-way data binding with the property corresponding to propName in LocalStorage. If the given property exists in LocalStorage, this API returns the one-way bound data for the property. If the given property does not exist, this API creates and initializes the property in LocalStorage using defaultValue and returns its one-way bound data.\nSince API version 12, LocalStorage supports Map, Set, Date, null, undefined, and union types.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet prop: SubscribedAbstractProperty<number> = storage.setAndProp('PropB', 49); // PropA -> 47, PropB -> 49"
+        },
+        {
+            "title": "delete9+",
+            "description": "delete(propName: string): boolean\nDeletes the property corresponding to propName from LocalStorage. The deletion is only successful if the property has no subscribers. If there is a subscriber, the deletion fails and false is returned. If there are no subscribers, the deletion is successful and true is returned.\nThe property subscribers include the following:\nVariables decorated by @LocalStorageLink or @LocalStorageProp\nInstances of SubscribedAbstractProperty returned by link, prop, setAndLink, or setAndProp\nTo delete these subscribers:\nRemove the custom component containing @LocalStorageLink or @LocalStorageProp. For details, see Custom Component Deletion.\nCall the aboutToBeDeleted API on instances of SubscribedAbstractProperty returned by link, prop, setAndLink, or setAndProp.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nstorage.link<number>('PropA');\nlet res: boolean = storage.delete('PropA'); // false: PropA still has subscribers.\nlet res1: boolean = storage.delete('PropB'); // false: PropB does not exist in LocalStorage.\nstorage.setOrCreate('PropB', 48);\nlet res2: boolean = storage.delete('PropB'); // true: PropB is successfully deleted from LocalStorage."
+        },
+        {
+            "title": "keys9+",
+            "description": "keys(): IterableIterator<string>\nObtains all property names in LocalStorage.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet keys: IterableIterator<string> = storage.keys();"
+        },
+        {
+            "title": "size9+",
+            "description": "size(): number\nObtains the number of properties in LocalStorage.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet res: number = storage.size(); // 1"
+        },
+        {
+            "title": "clear9+",
+            "description": "clear(): boolean\nDeletes all properties from LocalStorage. The deletion is only successful if none of the properties in LocalStorage have any subscribers. If there are subscribers, this API does not take effect and false is returned. If there are no subscribers, the deletion is successful and true is returned.\nFor details about the subscriber, see delete.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "let para: Record<string, number> = { 'PropA': 47 };\nlet storage: LocalStorage = new LocalStorage(para);\nlet res: boolean = storage.clear(); // true: There are no subscribers."
+        },
+        {
+            "title": "GetShared(deprecated)",
+            "description": "static GetShared(): LocalStorage\nObtains the LocalStorage instance shared across the current stage.\nThis API is supported since API version 9 and deprecated since API version 10. You are advised to use getSharedLocalStorage in UIContext instead.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nModel restriction: This API can be used only in the stage model.\nReturn value\nExample",
+            "code": "let storage: LocalStorage = LocalStorage.GetShared();"
+        },
+        {
+            "title": "get12+",
+            "description": "get(): T\nReads data of the referenced property from AppStorage or LocalStorage.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet ref1: AbstractProperty<number> | undefined = AppStorage.ref('PropA');\nref1?.get(); //  ref1.get()=47"
+        },
+        {
+            "title": "set12+",
+            "description": "set(newValue: T): void\nUpdates the data of the referenced property in AppStorage or LocalStorage. The value of newValue must be of the T type and can be null or undefined.\nSince API version 12, AppStorage and LocalStorage support the Map, Set, Date types, as well as null, undefined, and union types.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet ref1: AbstractProperty<number> | undefined = AppStorage.ref('PropA');\nref1?.set(1); //  ref1.get()=1\nlet a: Map<string, number> = new Map([['1', 0]]);\nlet ref2 = AppStorage.setAndRef('MapA', a);\nref2.set(a);\nlet b: Set<string> = new Set('1');\nlet ref3 = AppStorage.setAndRef('SetB', b);\nref3.set(b);\nlet c: Date = new Date('2024');\nlet ref4 = AppStorage.setAndRef('DateC', c);\nref4.set(c);\nref2.set(null);\nref3.set(undefined);"
+        },
+        {
+            "title": "info12+",
+            "description": "info(): string\nReads the property name of the referenced property from AppStorage or LocalStorage.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet ref1: AbstractProperty<number> | undefined = AppStorage.ref('PropA');\nref1?.info(); //  ref1.info()='PropA'"
+        },
+        {
+            "title": "get9+",
+            "description": "abstract get(): T\nReads the data of the synchronized property from AppStorage or LocalStorage.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet prop1: SubscribedAbstractProperty<number> = AppStorage.prop('PropA');\nprop1.get(); //  prop1.get()=47"
+        },
+        {
+            "title": "set9+",
+            "description": "abstract set(newValue: T): void\nSets the data of the synchronized property in AppStorage or LocalStorage. The value of newValue must be of the T type. Since API version 12, it can be null or undefined.\nSince API version 12, AppStorage and LocalStorage support the Map, Set, Date types, as well as null, undefined, and union types.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet prop1: SubscribedAbstractProperty<number> = AppStorage.prop('PropA');\nprop1.set(1); //  prop1.get()=1\n// Since API version 12, the Map, Set, Date types, as well as null, undefined, and union types are supported.\nlet a: Map<string, number> = new Map([['1', 0]]);\nlet prop2 = AppStorage.setAndProp('MapA', a);\nprop2.set(a);\nlet b: Set<string> = new Set('1');\nlet prop3 = AppStorage.setAndProp('SetB', b);\nprop3.set(b);\nlet c: Date = new Date('2024');\nlet prop4 = AppStorage.setAndProp('DateC', c);\nprop4.set(c);\nprop2.set(null);\nprop3.set(undefined);"
+        },
+        {
+            "title": "aboutToBeDeleted10+",
+            "description": "abstract aboutToBeDeleted(): void\nCancels the synchronization relationship between the SubscribedAbstractProperty instance and AppStorage or LocalStorage, whether it is a one-way or two-way binding. After aboutToBeDeleted is called, the SubscribedAbstractProperty instance is invalidated, meaning it can no longer be used to call the set or get API.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet link = AppStorage.setAndLink('PropB', 49); // PropA -> 47, PropB -> 49\nlink.aboutToBeDeleted();"
+        },
+        {
+            "title": "info10+",
+            "description": "info(): string\nProperty name.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "AppStorage.setOrCreate('PropA', 47);\nlet prop1: SubscribedAbstractProperty<number> = AppStorage.prop('PropA');\nprop1.info(); // prop1.info() = 'PropA'"
+        },
+        {
+            "title": "deleteProp10+",
+            "description": "static deleteProp(key: string): void\nPerforms the reverse operation of persistProp. Specifically, this API deletes the property corresponding to the specified key from PersistentStorage. Subsequent operations on AppStorage do not affect data in PersistentStorage. This operation removes the corresponding key from the persistence file. To persist the property again, you can call the persistProp API.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "PersistentStorage.deleteProp('highScore');"
+        },
+        {
+            "title": "persistProps10+",
+            "description": "static persistProps(props: PersistPropsOptions[]): void\nPersists multiple properties. This API is similar to persistProp, but allows multiple properties to be persisted at once, making it suitable for initializing during application startup.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "PersistentStorage.persistProps([{ key: 'highScore', defaultValue: '0' }, { key: 'wightScore', defaultValue: '1' }]);"
+        },
+        {
+            "title": "keys10+",
+            "description": "static keys(): Array<string>\nReturns an array of all persisted property names.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "let keys: Array<string> = PersistentStorage.keys();"
+        },
+        {
+            "title": "PersistProp(deprecated)",
+            "description": "static PersistProp<T>(key: string, defaultValue: T): void\nPersists the property corresponding to key from AppStorage to a file. This API is usually called before access to AppStorage.\nThe order for determining the type and value of a property is as follows:\nIf the property with the specified key is found in the PersistentStorage file, the corresponding property is created in AppStorage and initialized with the value found in PersistentStorage.\nIf the property with the specified key is not found in the PersistentStorage file, AppStorage is searched for the property. If the property is found, it is persisted.\nIf no matching property is found in AppStorage, it is created in AppStorage, initialized with the value of defaultValue, and persisted.\nAccording to the preceding initialization process, if the property exists in AppStorage, its value will be used, overriding the value in the PersistentStorage file. Because AppStorage stores data in the memory, the property value becomes nonpersistent.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use persistProp instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "PersistentStorage.PersistProp('highScore', '0');"
+        },
+        {
+            "title": "DeleteProp(deprecated)",
+            "description": "static DeleteProp(key: string): void\nPerforms the reverse operation of PersistProp. Specifically, this API deletes the property corresponding to the specified key from PersistentStorage. Subsequent operations on AppStorage do not affect data in PersistentStorage.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use deleteProp instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "PersistentStorage.DeleteProp('highScore');"
+        },
+        {
+            "title": "PersistProps(deprecated)",
+            "description": "static PersistProps(properties: {key: string; defaultValue: any;}[]): void\nPersists multiple properties. This API is similar to PersistProp, but allows multiple properties to be persisted at once, making it suitable for initializing during application startup.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use persistProps instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nArray of properties to persist.\nkey: property name.\ndefaultValue: default value. The rule is the same as that for PersistProp.\nExample",
+            "code": "PersistentStorage.PersistProps([{ key: 'highScore', defaultValue: '0' }, { key: 'wightScore', defaultValue: '1' }]);"
+        },
+        {
+            "title": "Keys(deprecated)",
+            "description": "static Keys(): Array<string>\nReturns an array of all persisted property names.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use keys instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "let keys: Array<string> = PersistentStorage.Keys();"
+        },
+        {
+            "title": "envProps10+",
+            "description": "static envProps(props: EnvPropsOptions[]): void\nWorks in a way similar to the envProp API, with the difference that it allows for initialization of multiple attributes in batches. It is recommended that this API be called during application startup to store system environment variables to AppStorage in batches.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "Environment.envProps([{ key: 'accessibilityEnabled', defaultValue: 'default' }, {\n  key: 'languageCode',\n  defaultValue: 'en'\n}, { key: 'prop', defaultValue: 'hhhh' }]);"
+        },
+        {
+            "title": "keys10+",
+            "description": "static keys(): Array<string>\nReturns the property key array of environment variables.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "Environment.envProps([{ key: 'accessibilityEnabled', defaultValue: 'default' }, {\n  key: 'languageCode',\n  defaultValue: 'en'\n}, { key: 'prop', defaultValue: 'hhhh' }]);\nlet keys: Array<string> = Environment.keys(); // keys contains accessibilityEnabled, languageCode, and prop."
+        },
+        {
+            "title": "EnvProp(deprecated)",
+            "description": "static EnvProp<S>(key: string, value: S): boolean\nStores the built-in environment variable key from Environment into AppStorage. If the value of the environment variable key is not found in AppStorage, the default value is used and stored in AppStorage. If the value is successfully stored, true is returned. If the value of the environment variable key already exists in AppStorage, false is returned.\nYou are advised to call this API when the application is started.\nIt is incorrect to use AppStorage to read environment variables without calling EnvProp first.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use envProp instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "Environment.EnvProp('accessibilityEnabled', 'default');"
+        },
+        {
+            "title": "EnvProps(deprecated)",
+            "description": "static EnvProps(props: {key: string; defaultValue: any;}[]): void\nWorks in a way similar to the EnvProp API, with the difference that it allows for initialization of multiple attributes in batches. It is recommended that this API be called during application startup to store system environment variables to AppStorage in batches.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use envProps instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "Environment.EnvProps([{ key: 'accessibilityEnabled', defaultValue: 'default' }, {\n  key: 'languageCode',\n  defaultValue: 'en'\n}, { key: 'prop', defaultValue: 'hhhh' }]);"
+        },
+        {
+            "title": "Keys(deprecated)",
+            "description": "static Keys(): Array<string>\nReturns the property key array of environment variables.\nThis API is supported since API version 7 and deprecated since API version 10. You are advised to use keys instead.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "Environment.EnvProps([{ key: 'accessibilityEnabled', defaultValue: 'default' }, {\n  key: 'languageCode',\n  defaultValue: 'en'\n}, { key: 'prop', defaultValue: 'hhhh' }]);\nlet keys: Array<string> = Environment.Keys(); // keys contains accessibilityEnabled, languageCode, and prop."
+        }
+    ]
+}

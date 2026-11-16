@@ -1,0 +1,17 @@
+{
+    "title": "@Entry: Page Entry Declaration",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-entry",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "@Entry",
+            "description": "A single page can only have one @Entry decorated custom component serving as its entry.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nExample",
+            "code": "@Entry\n@Component\nstruct Index {\n  build() {\n    Text('@Entry Test')\n  }\n}"
+        },
+        {
+            "title": "EntryOptions10+",
+            "description": "Describes the named route options.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nName of the target named route.\nWidget capability: This API can be used in ArkTS widgets since API version 10.\nAtomic service API: This API can be used in atomic services since API version 11.\nStores page-level UI status. If no value is passed, the framework creates a new LocalStorage instance as the default value.\nWidget capability: This API can be used in ArkTS widgets since API version 10.\nAtomic service API: This API can be used in atomic services since API version 11.\nWhether to use the LocalStorage instance passed by loadContent. The default value is false. true: Use the shared LocalStorage instance. false: Do not use the shared LocalStorage instance.\nWidget capability: This API can be used in ArkTS widgets since API version 12.\nAtomic service API: This API can be used in atomic services since API version 12.\nExample",
+            "code": "@Entry({ routeName: 'myPage' })\n@Component\nstruct Index {\n  build() {\n    Text('Index')\n  }\n}"
+        }
+    ]
+}

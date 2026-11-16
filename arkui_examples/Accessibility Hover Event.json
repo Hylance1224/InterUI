@@ -1,0 +1,17 @@
+{
+    "title": "Accessibility Hover Event",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-accessibility-hover-event",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Using the onAccessibilityHover Event",
+            "description": "This example demonstrates how to use the onAccessibilityHover event to customize a button in accessibility mode.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct OnAccessibilityHoverEventExample {\n  @State hoverText: string = 'no hover';\n  @State color: Color = Color.Blue;\n  build() {\n    Column({ space: 20 }) {\n      Button(this.hoverText)\n        .width(180).height(80)\n        .backgroundColor(this.color)\n        .onAccessibilityHover((isHover: boolean, event: AccessibilityHoverEvent) => {\n          // Use the onAccessibilityHover event to dynamically change the text content and background color of a button when the finger is hovered on it.\n          if (isHover) {\n            this.hoverText = 'hover';\n            this.color = Color.Pink;\n          } else {\n            this.hoverText = 'no hover';\n            this.color = Color.Blue;\n          }\n        })\n    }.padding({ top: 30 }).width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 2: Capturing a Touch Event on a Non-Focusable Component",
+            "description": "This example shows how to capture touch events from a component that cannot receive focus in accessibility mode using the onAccessibilityHoverTransparent API and display event details in the text area below.\nStarting from API version 20, the onAccessibilityHoverTransparent API with the input parameter AccessibilityTransparentCallback has been added.",
+            "code": "@Entry\n@Component\nstruct TestExample {\n  @State text: string = '';\n  @State eventType: string = '';\n  build() {\n    Column({ space: 50 }) {\n      Column() {\n        Button(\"Test Button\")\n          .accessibilityLevel(\"no\")\n      }.margin({ top: 20 })\n      Text(this.text)\n    }\n    .width('100%')\n    .height('100%')\n    .onAccessibilityHoverTransparent((event?: TouchEvent) => {\n      if (event) {\n        // Triggered on finger press.\n        if (event.type === TouchType.HOVER_ENTER) {\n          this.eventType = 'HOVER_ENTER';\n        }\n        // Triggered on touch move.\n        if (event.type === TouchType.HOVER_MOVE) {\n          this.eventType = 'HOVER_MOVE';\n        }\n        // Triggered on hand raise.\n        if (event.type === TouchType.HOVER_EXIT) {\n          this.eventType = 'HOVER_EXIT';\n        }\n        // Cancel the current event.\n        if (event.type === TouchType.HOVER_CANCEL) {\n          this.eventType = 'HOVER_CANCEL';\n        }\n        this.text = 'TouchType:' + this.eventType + '\\nDistance between touch point and touch element:\\nx: '\n          + event.touches[0].x + '\\n' + 'y: ' + event.touches[0].y + '\\nComponent globalPos:('\n          + event.target.area.globalPosition.x + ',' + event.target.area.globalPosition.y + ')\\nwidth:'\n          + event.target.area.width + '\\nheight:' + event.target.area.height;\n      }\n    })\n  }\n}"
+        }
+    ]
+}

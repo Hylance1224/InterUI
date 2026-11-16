@@ -1,0 +1,12 @@
+{
+    "title": "Shared Element Transition (sharedTransition)",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-transition-animation-shared-elements",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example implements the custom transition of a shared image during redirection from one page to another, which is triggered by a click on the image.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct SharedTransitionExample {\n  build() {\n    Column() {\n      // Replace $r('app.media.ic_health_heart') with the image resource file you use.\n      Image($r('app.media.ic_health_heart')).width(50).height(50).margin({ left: 20, top: 20 })\n        .sharedTransition('sharedImage', { duration: 800, curve: Curve.Linear, delay: 100 })\n    }.width('100%').height('100%').alignItems(HorizontalAlign.Start)\n    .onClick(() => {\n      this.getUIContext().getRouter().pushUrl({ url: 'pages/PageB' })\n    })\n  }\n  pageTransition() {\n    PageTransitionEnter({ type: RouteType.None, duration: 0 })\n    PageTransitionExit({ type: RouteType.None, duration: 0 })\n  }\n}"
+        }
+    ]
+}

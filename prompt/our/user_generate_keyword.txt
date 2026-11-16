@@ -1,0 +1,6 @@
+Analyze the following UI Layout Tree.
+
+Identify the ArkUI implementation questions required to reproduce the interactions described in `interaction_description`, and provide relevant search keywords for each question.
+
+UI Layout Tree:
+{{layout_tree}}

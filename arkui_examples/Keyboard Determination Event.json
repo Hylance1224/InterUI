@@ -1,0 +1,12 @@
+{
+    "title": "Keyboard Determination Event",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-events-onneedsoftkeyboard",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example 1: Enabling the Keyboard Continuation",
+            "description": "In this example, the onNeedSoftkeyboard API is used to enable the keyboard continuation for a button. After the keyboard is started by the text box, switch the focus to the button upon a tap. In this case, the keyboard will not collapse. Tap the text box again to continue entering text.\nThe onNeedSoftkeyboard API is available since API version 24.",
+            "code": "@Entry\n@Component\nstruct Index {\n  build() {\n    Column() {\n      Button('Switch Focus to the Button')\n        .onClick(() => {\n          this.getUIContext().getFocusController().requestFocus('Button')\n        })\n        .key('Button')\n        .fontSize(20)\n        .width('80%')\n        .margin('10')\n        .onNeedSoftkeyboard((): boolean => {\n          return true;\n        })\n      TextInput()\n        .key('TextInput1')\n    }\n    .height('100%')\n    .width('100%')\n  }\n}"
+        }
+    ]
+}

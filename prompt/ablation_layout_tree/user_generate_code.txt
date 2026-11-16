@@ -1,0 +1,12 @@
+Analyze the provided UI screenshots and implementation questions with their answers, then generate complete ArkUI code compatible with API 21.
+
+Prioritize the UI screenshots as the primary source of truth. Reproduce the visual appearance, layout, component positions, sizes, spacing, and interaction states based primarily on the screenshots.
+
+Use the implementation questions and answers as auxiliary guidance for implementing dynamic interactions.
+
+If the screenshots conflict with the implementation guidance, always follow the screenshots.
+
+Use $r('app.media.image') consistently for all local images and icon resources referenced in the code.
+
+Implementation Questions and Answers:
+{{questions_and_answers}}

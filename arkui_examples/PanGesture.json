@@ -1,0 +1,12 @@
+{
+    "title": "PanGesture",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-gestures-pangesture",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates the recognition of single-finger and double-finger pan gestures using PanGesture.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct PanGestureExample {\n  @State offsetX: number = 0;\n  @State offsetY: number = 0;\n  @State positionX: number = 0;\n  @State positionY: number = 0;\n  private panOption: PanGestureOptions = new PanGestureOptions({ direction: PanDirection.Left | PanDirection.Right });\n  build() {\n    Column() {\n      Column() {\n        Text('PanGesture offset:\\nX: ' + this.offsetX + '\\n' + 'Y: ' + this.offsetY)\n      }\n      .height(200)\n      .width(300)\n      .padding(20)\n      .border({ width: 3 })\n      .margin(50)\n      .translate({ x: this.offsetX, y: this.offsetY, z: 0}) // Move the component with its upper left corner as the coordinate origin.\n      // Pan left and right to trigger the gesture event\n      .gesture(\n      PanGesture(this.panOption)\n        .onActionStart((event: GestureEvent) => {\n          console.info('Pan start');\n          console.info(`Pan start timeStamp is: ${event.timestamp}`);\n        })\n        .onActionUpdate((event: GestureEvent) => {\n          if (event) {\n            this.offsetX = this.positionX + event.offsetX;\n            this.offsetY = this.positionY + event.offsetY;\n          }\n        })\n        .onActionEnd((event: GestureEvent) => {\n          this.positionX = this.offsetX;\n          this.positionY = this.offsetY;\n          console.info('Pan end');\n          console.info(`Pan end timeStamp is: ${event.timestamp}`);\n        })\n      )\n      Button('Set PanGesture Trigger Condition')\n        .onClick(() => {\n          // Change the trigger condition to double-finger panning in any direction.\n          this.panOption.setDirection(PanDirection.All);\n          this.panOption.setFingers(2);\n        })\n    }\n  }\n}"
+        }
+    ]
+}

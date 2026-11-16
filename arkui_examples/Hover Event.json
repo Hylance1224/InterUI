@@ -1,0 +1,17 @@
+{
+    "title": "Hover Event",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-events-hover",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Using onHover",
+            "description": "This example demonstrates how to set the onHover event on a button. When the mouse or stylus hovers over the button, the event is triggered to dynamically change the text content and background color of the button.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct HoverEventExample {\n  @State hoverText: string = 'no hover';\n  @State color: Color = Color.Blue;\n  build() {\n    Column({ space: 20 }) {\n      Button(this.hoverText, { type: ButtonType.Capsule })\n        .width(180).height(80)\n        .backgroundColor(this.color)\n        .onHover((isHover: boolean, event: HoverEvent) => {\n          // Use the onHover event to dynamically change the text content and background color of a button when the mouse pointer or stylus is hovered on it.\n          // Use event.sourceTool to determine whether the device is a mouse device or stylus.\n          if (isHover) {\n            if (event.sourceTool == SourceTool.Pen) {\n              this.hoverText = 'pen hover';\n              this.color = Color.Pink;\n            } else if (event.sourceTool == SourceTool.MOUSE) {\n              this.hoverText = 'mouse hover';\n              this.color = Color.Red;\n            }\n          } else {\n            this.hoverText = 'no hover';\n            this.color = Color.Blue;\n          }\n        })\n    }.padding({ top: 30 }).width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 2: Using onHoverMove",
+            "description": "This example demonstrates how to configure the onHoverMove event on a button, available since API version 15. When a stylus hovers over the button, the UI displays the current stylus position.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct OnHoverMoveEventExample {\n  @State hoverMoveText: string = '';\n  build() {\n    Column({ space: 20 }) {\n      Button('onHoverMove', { type: ButtonType.Capsule })\n        .width(180).height(80)\n        .onHoverMove((event: HoverEvent) => {\n          this.hoverMoveText = 'onHoverMove:\\nXY = (' + event.x + ', ' + event.y + ')' +\n                               '\\nwindowXY = (' + event.windowX + ', ' + event.windowY + ')' +\n                               '\\ndisplayXY = (' + event.displayX + ', ' + event.displayY + ')';\n        })\n      Text(this.hoverMoveText)\n    }.padding({ top: 30 }).width('100%')\n  }\n}"
+        }
+    ]
+}

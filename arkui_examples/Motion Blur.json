@@ -1,0 +1,12 @@
+{
+    "title": "Motion Blur",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-motionblur",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to apply a motion blur effect.",
+            "code": "// xxx.ets\nimport { curves } from '@kit.ArkUI';\n@Entry\n@Component\nstruct motionBlurTest {\n  @State widthSize: number = 300\n  @State heightSize: number = 240\n  @State flag: boolean = true\n  @State radius: number = 0\n  @State x: number = 0.5\n  @State y: number = 0.5\n  build() {\n    Column() {\n      Column() {\n        // Replace $r('app.media.test') with the image resource file you use.\n        Image($r('app.media.test'))\n          .width(this.widthSize)\n          .height(this.heightSize)\n          .scale({ x: this.flag ? 1 : 0.8,y: this.flag ? 1 : 0.8 ,centerX: \"50%\", centerY: \"50%\" })\n          .onClick(() => {\n            this.radius = 50;\n            this.x = 0.5;\n            this.y = 0.5;\n            this.flag = !this.flag;\n          })\n          .animation({\n            duration: 2000, // Animation playback time.\n            iterations:1, // Animation playback iterations.\n            playMode:PlayMode.Alternate, // Animation playback mode: plays forward on odd-numbered iterations (1st, 3rd, 5th...) and reverse on even-numbered iterations (2nd, 4th, 6th...).\n            curve: curves.springCurve(10, 1, 228, 30), // Animation curve.\n            onFinish: () => {\n              this.radius = 0;\n              console.info(\"onFinish\")\n            },\n          })\n          .motionBlur({ radius: this.radius, anchor: { x: this.x, y: this.y } })\n      }\n    }.width('100%')\n    .margin({ top: 50 })\n  }\n}"
+        }
+    ]
+}

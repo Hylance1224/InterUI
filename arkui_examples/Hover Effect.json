@@ -1,0 +1,12 @@
+{
+    "title": "Hover Effect",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-hover-effect",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to set the hover effect for components using hoverEffect.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct HoverExample {\n  @State isHoverVal: boolean = false\n  build() {\n    Column({ space: 5 }) {\n      Column({ space: 5 }) {\n        Text('Scale').fontSize(20).fontColor(Color.Gray).width('90%').position({ x: 0, y: 80 })\n        Column()\n          .width('80%')\n          .height(200)\n          .backgroundColor(Color.Gray)\n          .position({ x: 40, y: 120 })\n          .hoverEffect(HoverEffect.Scale)\n          .onHover((isHover?: boolean) => {\n            console.info(`Scale isHover: ${isHover}`)\n            this.isHoverVal = isHover as boolean\n          })\n        Text('Board').fontSize(20).fontColor(Color.Gray).width('90%').position({ x: 0, y: 380 })\n        Column()\n          .width('80%')\n          .height(200)\n          .backgroundColor(Color.Yellow)\n          .hoverEffect(HoverEffect.Highlight)\n          .position({ x: 40, y: 420 })\n          .onHover((isHover?: boolean) => {\n            console.info(`Highlight isHover: ${isHover}`)\n            this.isHoverVal = isHover as boolean\n          })\n      }\n      .hoverEffect(HoverEffect.None)\n      .width('100%')\n      .height('100%')\n      .border({ width: 1 })\n      .onHover((isHover?: boolean) => {\n        console.info('HoverEffect.None')\n        this.isHoverVal = isHover as boolean\n      })\n    }\n  }\n}"
+        }
+    ]
+}

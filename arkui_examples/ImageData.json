@@ -1,0 +1,12 @@
+{
+    "title": "ImageData",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-components-canvas-imagedata",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example shows how to use the getImageData API to obtain an ImageData object.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct Translate {\n  private settings: RenderingContextSettings = new RenderingContextSettings(true);\n  private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings);\n  // Replace \"common/images/1234.png\" with the image resource file you use.\n  private img: ImageBitmap = new ImageBitmap(\"common/images/1234.png\");\n  build() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {\n      Canvas(this.context)\n        .width('100%')\n        .height('100%')\n        .backgroundColor('#ffff00')\n        .onReady(() => {\n          this.context.drawImage(this.img, 0, 0, 130, 130)\n          let imageData = this.context.getImageData(50, 50, 130, 130)\n          this.context.putImageData(imageData, 150, 150)\n        })\n    }\n    .width('100%')\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

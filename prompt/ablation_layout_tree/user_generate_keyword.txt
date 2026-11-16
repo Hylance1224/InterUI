@@ -1,0 +1,5 @@
+Analyze the provided UI screenshots directly.
+
+The first image is the initial page (main.jpg). The remaining images are interaction states (p1, p2, ...) in numeric order. Compare these with the initial page and identify the ArkUI implementation questions required to reproduce the visible interactions, with relevant search keywords for each question.
+
+Do not generate a layout tree. Return only the required JSON array.

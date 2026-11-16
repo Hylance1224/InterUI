@@ -1,0 +1,3 @@
+Analyze the provided UI screenshots and generate complete ArkUI code compatible with API 21.
+
+(Important!) Use $r('app.media.image') consistently for all local images and icon resources referenced in the code.

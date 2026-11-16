@@ -1,0 +1,32 @@
+{
+    "title": "DatePicker",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-components-datepicker",
+    "example_count": 5,
+    "examples": [
+        {
+            "title": "enableHapticFeedback18+",
+            "description": "enableHapticFeedback(enable: Optional<boolean>)\nSets whether to enable haptic feedback.\nAtomic service API: This API can be used in atomic services since API version 18.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nWhether to enable haptic feedback.\n- true: Enable haptic feedback.\n- false: Disable haptic feedback.\nDefault value: true.\nWhether this parameter takes effect after being set to true depends on hardware support.\nIf the value of enable is undefined, the default value is used.\nTo enable haptic feedback, you must declare the following permission under requestPermissions in module in src/main/module.json5 of the project:",
+            "code": "\"requestPermissions\": [\n   {\n      \"name\": \"ohos.permission.VIBRATE\",\n   }\n]"
+        },
+        {
+            "title": "Example 1: Switching Between Gregorian and Lunar Calendars",
+            "description": "This example implements a date picker that allows users to switch between the Gregorian (solar) calendar and the lunar calendar by clicking a button.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct DatePickerExample {\n  @State isLunar: boolean = false;\n  private selectedDate: Date = new Date('2021-08-08');\n  build() {\n    Column() {\n      Button('Switch Calendar')\n        .margin({ top: 30, bottom: 30 })\n        .onClick(() => {\n          this.isLunar = !this.isLunar;\n        })\n      DatePicker({\n        start: new Date('1970-1-1'),\n        end: new Date('2100-1-1'),\n        selected: this.selectedDate\n      })\n        .lunar(this.isLunar)\n        .onDateChange((value: Date) => {\n          this.selectedDate = value;\n          console.info('select current date is: ' + value.toString());\n        })\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 2: Setting the Text Style",
+            "description": "This example shows how to customize the text style using disappearTextStyle, textStyle, and selectedTextStyle.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct DatePickerExample {\n  private selectedDate: Date = new Date('2021-08-08');\n  build() {\n    Column() {\n      DatePicker({\n        start: new Date('1970-1-1'),\n        end: new Date('2100-1-1'),\n        selected: this.selectedDate\n      })\n        .disappearTextStyle({ color: Color.Gray, font: { size: '16fp', weight: FontWeight.Bold } })\n        .textStyle({ color: '#ff182431', font: { size: '18fp', weight: FontWeight.Normal } })\n        .selectedTextStyle({ color: '#ff0000FF', font: { size: '26fp', weight: FontWeight.Regular, family: \"HarmonyOS Sans\", style: FontStyle.Normal } })\n        .onDateChange((value: Date) => {\n          this.selectedDate = value;\n          console.info('select current date is: ' + value.toString());\n        })\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 3: Displaying Year and Month, or Month and Day Columns",
+            "description": "This example demonstrates how to display year and month, or month and day columns using mode.\nThe mode attribute of DatePickerOptions is added since API version 18.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct DatePickerExample {\n  @State isLunar: boolean = false;\n  private selectedDate: Date = new Date('2025-01-15');\n  @State datePickerModeList: (DatePickerMode)[] = [\n    DatePickerMode.DATE,\n    DatePickerMode.YEAR_AND_MONTH,\n    DatePickerMode.MONTH_AND_DAY,\n  ];\n  @State datePickerModeIndex: number = 0;\n  build() {\n    Column() {\n      Button('Switch Calendar')\n        .margin({ top: 30, bottom: 30 })\n        .onClick(() => {\n          this.isLunar = !this.isLunar;\n        })\n      DatePicker({\n        start: new Date('1970-1-1'),\n        end: new Date('2100-1-1'),\n        selected: this.selectedDate,\n        mode:this.datePickerModeList[this.datePickerModeIndex]\n      })\n        .lunar(this.isLunar)\n        .onDateChange((value: Date) => {\n          this.selectedDate = value;\n          console.info('select current date is: ' + value.toString());\n        })\n      Button('mode :' + this.datePickerModeIndex).margin({ top: 20 })\n        .onClick(() => {\n          this.datePickerModeIndex++;\n          if(this.datePickerModeIndex >= this.datePickerModeList.length){\n            this.datePickerModeIndex = 0;\n          }\n        })\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 4: Setting Loop Scrolling",
+            "description": "This example demonstrates how to set whether to enable loop scrolling using canLoop, available since API version 20.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct DatePickerExample {\n  @State isLoop: boolean = true;\n  selectedDate: Date = new Date(\"2010-1-1\");\n  build() {\n    Column() {\n      DatePicker({\n        start: new Date(\"2000-1-1\"),\n        end: new Date(\"2100-12-31\"),\n        selected: this.selectedDate,\n      })\n        .canLoop(this.isLoop)\n        .onDateChange((value: Date) => {\n            console.info(\"DatePicker:onDateChange()\" + value.toString());\n        })\n      Row() {\n        Text('Loop scroll').fontSize(20)\n        Toggle({ type: ToggleType.Switch, isOn: true })\n          .onChange((isOn: boolean) => {\n            this.isLoop = isOn;\n          })\n      }.position({ x: '60%', y: '40%' })\n    }.width('100%')\n  }\n}"
+        }
+    ]
+}

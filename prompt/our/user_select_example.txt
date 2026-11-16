@@ -1,0 +1,7 @@
+Question:
+{{question}}
+
+Candidate examples:
+{{examples}}
+
+Select the single example that is most useful for answering the question. If none is suitable, return null.

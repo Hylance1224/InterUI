@@ -1,0 +1,12 @@
+{
+    "title": "Component Area Change Event",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-component-area-change-event",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to set an area change event for a Text component. When the layout of the Text component changes, the onAreaChange event is triggered, allowing you to obtain relevant parameters.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct AreaExample {\n  @State value: string = 'Text'\n  @State sizeValue: string = ''\n  build() {\n    Column() {\n      Text(this.value)\n        .backgroundColor(Color.Green)\n        .margin(30)\n        .fontSize(20)\n        .onClick(() => {\n          this.value = this.value + 'Text'\n        })\n        .onAreaChange((oldValue: Area, newValue: Area) => {\n          console.info(`Ace: on area change, oldValue is ${JSON.stringify(oldValue)} value is ${JSON.stringify(newValue)}`)\n          this.sizeValue = JSON.stringify(newValue)\n        })\n      Text('new area is: \\n' + this.sizeValue).margin({ right: 30, left: 30 })\n    }\n    .width('100%').height('100%').margin({ top: 30 })\n  }\n}"
+        }
+    ]
+}

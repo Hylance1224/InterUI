@@ -1,0 +1,12 @@
+{
+    "title": "Symbol Glyph Modifier",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-attribute-symbolglyphmodifier",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to use SymbolGlyphModifier and the cancelButton attribute of the TextInput component to customize the style of the symbol-type cancel button on the right side of the text box.",
+            "code": "import { SymbolGlyphModifier } from '@kit.ArkUI';\n// xxx.ets\n@Entry\n@Component\nstruct Index {\n  @State text: string = '';\n  symbolModifier: SymbolGlyphModifier =\n    new SymbolGlyphModifier($r('sys.symbol.trash')).fontColor([Color.Red]).fontSize(16).fontWeight(FontWeight.Regular);\n  build() {\n    Column() {\n      TextInput({ text: this.text, placeholder: 'input your word...' })\n        .height(50)\n        .cancelButton({\n          style: CancelButtonStyle.CONSTANT,\n          icon: this.symbolModifier // The symbol type is supported since API version 18.\n        })\n    }.margin(10)\n  }\n}"
+        }
+    ]
+}

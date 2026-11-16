@@ -1,0 +1,12 @@
+{
+    "title": "ContextMenu",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-methods-menu",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to call the ContextMenu.close API to close a context menu that is bound to a component using bindContextMenu.\nYou are advised to use the getContextMenuController API in UIContext to specify the UI execution context.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct Index {\n  @Builder MenuBuilder() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {\n      Button('ContextMenu1')\n      Divider().strokeWidth(2).margin(5).color(Color.Black)\n      Button('ContextMenu2')\n      Divider().strokeWidth(2).margin(5).color(Color.Black)\n      Button('ContextMenu3')\n    }\n    .width(200)\n    .height(160)\n  }\n  build() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {\n      Column() {\n        Text('Long press to show ContextMenu')\n          .fontSize(20)\n          .width('100%')\n          .height(500)\n          .backgroundColor(0xAFEEEE)\n          .textAlign(TextAlign.Center)\n      }\n      .bindContextMenu(this.MenuBuilder, ResponseType.LongPress)\n      .onDragStart(()=>{\n        // Close the menu when the component is dragged.\n        ContextMenu.close() // You are advised to use this.getUIContext().getContextMenuController().close() to obtain the UI context.\n      })\n    }\n    .width('100%')\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

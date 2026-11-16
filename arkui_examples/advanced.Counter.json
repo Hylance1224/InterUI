@@ -1,0 +1,32 @@
+{
+    "title": "advanced.Counter",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ohos-arkui-advanced-counter",
+    "example_count": 5,
+    "examples": [
+        {
+            "title": "Example 1: Implementing a List Counter",
+            "description": "This example implements a list counter by setting type to CounterType.LIST and configuring numberOptions.",
+            "code": "import { CounterType, CounterComponent } from '@kit.ArkUI';\n@Entry\n@Component\nstruct ListCounterExample {\n  build() {\n    Column() {\n      // List counter\n      CounterComponent({\n        options: {\n          type: CounterType.LIST,\n          numberOptions: {\n            label: \"Price\",\n            min: 0,\n            value: 5,\n            max: 10\n          }\n        }\n      })\n    }\n  }\n}"
+        },
+        {
+            "title": "Example 2: Implementing a Compact Counter",
+            "description": "This example implements a compact counter by setting type to CounterType.COMPACT and configuring numberOptions.",
+            "code": "import { CounterType, CounterComponent } from '@kit.ArkUI';\n@Entry\n@Component\nstruct CompactCounterExample {\n  build() {\n    Column() {\n      // Compact counter\n      CounterComponent({\n        options: {\n          type: CounterType.COMPACT,\n          numberOptions: {\n            label: \"Quantity\",\n            value: 10,\n            min: 0,\n            max: 100,\n            step: 10\n          }\n        }\n      })\n    }\n  }\n}"
+        },
+        {
+            "title": "Example 3: Implementing an Inline Numeric Counter",
+            "description": "This example implements an inline numeric counter by setting type to CounterType.INLINE and configuring inlineOptions.",
+            "code": "import { CounterType, CounterComponent } from '@kit.ArkUI';\n@Entry\n@Component\nstruct NumberStyleExample {\n  build() {\n    Column() {\n      // Inline numeric counter\n      CounterComponent({\n        options: {\n          type: CounterType.INLINE,\n          inlineOptions: {\n            value: 100,\n            min: 10,\n            step: 2,\n            max: 1000,\n            textWidth: 100,\n            onChange: (value: number) => {\n              console.info('onCounterChange Counter: ' + value.toString());\n            }\n          }\n        }\n      })\n    }\n  }\n}"
+        },
+        {
+            "title": "Example 4: Implementing an Inline Date Counter",
+            "description": "This example implements an inline date counter by setting type to CounterType.INLINE_DATE and configuring dateOptions.",
+            "code": "import { CounterType, CounterComponent, DateData } from '@kit.ArkUI';\n@Entry\n@Component\nstruct DataStyleExample {\n  build() {\n    Column() {\n      // Inline date counter\n      CounterComponent({\n        options: {\n          type: CounterType.INLINE_DATE,\n          dateOptions: {\n            year: 2016,\n            onDateChange: (date: DateData) => {\n              console.info('onDateChange Date: ' + date.toString());\n            }\n          }\n        }\n      })\n    }\n  }\n}"
+        },
+        {
+            "title": "Example 5: Implementing a Mirrored Layout",
+            "description": "This example implements a mirrored layout for list, compact, inline numeric, and inline date counters by setting direction.",
+            "code": "import { CounterType, CounterComponent, DateData } from '@kit.ArkUI';\n@Entry\n@Component\nstruct CounterPage {\n  @State currentDirection: Direction = Direction.Rtl\n  build() {\n    Column({}) {\n      // List counter\n      CounterComponent({\n        options: {\n          direction: this.currentDirection,\n          type: CounterType.LIST,\n          numberOptions: {\n            label: \"Price\",\n            min: 0,\n            value: 5,\n            max: 10,\n          }\n        }\n      })\n        .width('80%')\n      // Numeric counter\n      CounterComponent({\n        options: {\n          direction: this.currentDirection,\n          type: CounterType.COMPACT,\n          numberOptions: {\n            label: \"Quantity\",\n            value: 10,\n            min: 0,\n            max: 100,\n            step: 10\n          }\n        }\n      }).margin({ top: 20 })\n      // Inline numeric counter\n      CounterComponent({\n        options: {\n          type: CounterType.INLINE,\n          direction: this.currentDirection,\n          inlineOptions: {\n            value: 100,\n            min: 10,\n            step: 2,\n            max: 1000,\n            textWidth: 100,\n            onChange: (value: number) => {\n              console.info('onCounterChange Counter: ' + value.toString());\n            }\n          }\n        }\n      }).margin({ top: 20 })\n      // Inline date counter\n      CounterComponent({\n        options: {\n          direction: this.currentDirection,\n          type: CounterType.INLINE_DATE,\n          dateOptions: {\n            year: 2024,\n            onDateChange: (date: DateData) => {\n              console.info('onDateChange Date: ' + date.toString());\n            }\n          }\n        }\n      }).margin({ top: 20 })\n    }\n    .width('100%')\n    .height('100%')\n    .justifyContent(FlexAlign.Center)\n    .alignItems(HorizontalAlign.Center)\n  }\n}"
+        }
+    ]
+}

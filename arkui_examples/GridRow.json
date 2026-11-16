@@ -1,0 +1,27 @@
+{
+    "title": "GridRow",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-gridrow",
+    "example_count": 4,
+    "examples": [
+        {
+            "title": "GridRowColumnOption",
+            "description": "Describes the numbers of grid columns for devices with different grid sizes.\nIn versions earlier than API version 20: When GridRow column spans are configured only at specific breakpoints, unconfigured breakpoints inherit values from the next smaller configured breakpoint. If no smaller breakpoint exists, the default column count (12) is used for unconfigured breakpoints.",
+            "code": "columns: {xs:2, md:4, lg:8} // Equivalent to columns: {xs:2, sm:2, md:4, lg:8, xl:8, xxl:8}.\ncolumns: {md:4, lg:8} // Equivalent to columns: {xs:12, sm:12, md:4, lg:8, xl:8, xxl:8}."
+        },
+        {
+            "title": "BreakPoints",
+            "description": "Sets breakpoints for the responsive grid container. For details about breakpoints, see Breakpoints.\nWidget capability: This API can be used in ArkTS widgets since API version 9.\nAtomic service API: This API can be used in atomic services since API version 11.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nArray of monotonically increasing breakpoints.\nDefault value: [\"320vp\", \"600vp\", \"840vp\"]\nInvalid values are treated as the default value.\nUnit: vp.\nBreakpoint switching reference.\nDefault value: BreakpointsReference.WindowSize\nInvalid values are treated as the default value.",
+            "code": "// Enable the xs, sm, and md breakpoints.\n  breakpoints: {value: ['100vp', '200vp']}\n  // Enable four breakpoints: xs, sm, md, and lg. The breakpoint range must be monotonically increasing.\n  breakpoints: {value: ['320vp', '600vp', '840vp']}\n  // Enable five breakpoints: xs, sm, md, lg, and xl. The number of breakpoint ranges cannot exceed the number of breakpoints minus 1.\n  breakpoints: {value: ['320vp', '600vp', '840vp', '1080vp']}"
+        },
+        {
+            "title": "Example 1: Basic Usage of Grid Layout",
+            "description": "This example demonstrates the basic usage of the GridRow component.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct GridRowExample {\n  @State bgColors: Color[] = [Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Pink, Color.Grey, Color.Blue, Color.Brown]\n  @State currentBp: string = 'unknown'\n  build() {\n    Column() {\n      GridRow({\n        columns: 5,\n        gutter: { x: 5, y: 10 },\n        breakpoints: { value: ['400vp', '600vp', '800vp'],\n          reference: BreakpointsReference.WindowSize },\n        direction: GridRowDirection.Row\n      }) {\n        ForEach(this.bgColors, (color: Color) => {\n          GridCol({ span: { xs: 1, sm: 2, md: 3, lg: 4 }, offset: 0, order: 0 }) {\n            Row().width('100%').height('20vp')\n          }.borderColor(color).borderWidth(2)\n        })\n      }.width('100%').height('100%')\n      .onBreakpointChange((breakpoint) => {\n        this.currentBp = breakpoint\n      })\n    }.width('80%').margin({ left: 10, top: 5, bottom: 5 }).height(200)\n    .border({ color: '#880606', width: 2 })\n  }\n}"
+        },
+        {
+            "title": "Example 2: Basic Usage of AlignItems",
+            "description": "This example demonstrates the effect of the GridCol component in different alignItems alignment modes.",
+            "code": "@ComponentV2\nstruct AlignItemsDemo {\n  bgColors: Color[] = [Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Pink];\n  @Param alignment: ItemAlign = ItemAlign.Start; // Receive the alignItems attribute value passed from the parent component.\n  ToString(alignment: ItemAlign): string {\n    switch (alignment) {\n      case ItemAlign.Start:\n        return \"ItemAlign.Start\";\n      case ItemAlign.Center:\n        return \"ItemAlign.Center\";\n      case ItemAlign.End:\n        return \"ItemAlign.End\";\n      case ItemAlign.Stretch:\n        return \"ItemAlign.Stretch\";\n      default:\n        return \"ItemAlign.Auto\";\n    }\n  }\n  build() {\n    Column() {\n      Text(this.ToString(this.alignment))\n        .fontSize(9)\n        .fontColor(0xCCCCCC)\n        .width('90%')\n        .alignSelf(ItemAlign.Start)\n      GridRow({\n        columns: 5,\n        gutter: { x: 5, y: 10 },\n      }) {\n        ForEach(this.bgColors, (color: Color, index: number) => {\n          GridCol({ span: 1 }) {\n            Row() {\n            }.width('100%').height(`${(index + 1) * 20}%`) // Set different heights for GridCol to facilitate observing the effect of the alignItems attribute.\n          }.borderColor(color).borderWidth(2)\n        })\n      }\n      .border({ color: '#880606', width: 2 })\n      .alignItems(this.alignment)\n      .width('100%')\n    }\n    .height(\"20%\")\n  }\n}\n@Entry\n@ComponentV2\nstruct GridRowExample {\n  alignmentArray: ItemAlign[] = [ItemAlign.Start, ItemAlign.Center, ItemAlign.End, ItemAlign.Stretch];\n  build() {\n    Column({ space: 15 }) {\n      ForEach(this.alignmentArray, (ele: ItemAlign) => {\n        AlignItemsDemo({ alignment: ele })\n      })\n    }.width('80%').margin({ left: 10, top: 5, bottom: 5 }).height(\"100%\")\n  }\n}"
+        }
+    ]
+}

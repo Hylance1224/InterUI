@@ -1,0 +1,12 @@
+{
+    "title": "WithTheme",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-with-theme",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "For the light and dark modes to take effect, add a dark.json resource file.\nExample of the dark.json file content:",
+            "code": "{\n    \"color\": [\n      {\n        \"name\": \"start_window_background\",\n        \"value\": \"#000000\"\n      }\n    ]\n  }"
+        }
+    ]
+}

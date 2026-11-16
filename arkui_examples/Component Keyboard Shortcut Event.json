@@ -1,0 +1,17 @@
+{
+    "title": "Component Keyboard Shortcut Event",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-events-keyboardshortcut",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Setting Component Keyboard Shortcuts",
+            "description": "This example demonstrates how to set up keyboard shortcuts for components. This allows users to press the modifier key and accompanying key at the same time to trigger the component to respond to the shortcut and trigger the onClick event or a custom event.",
+            "code": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'Hello World'\n  build() {\n    Row() {\n      Column({ space: 5 }) {\n        Text(this.message)\n        Button(\"Test short cut 1\").onClick((event: ClickEvent) => {\n          this.message = \"I clicked Button 1\";\n          console.info(\"I clicked 1\");\n        }).keyboardShortcut('.', [ModifierKey.SHIFT, ModifierKey.CTRL, ModifierKey.ALT])\n          .onKeyEvent((event: KeyEvent) => {\n            console.info(\"event.keyCode: \" + JSON.stringify(event));\n          })\n        Button(\"Test short cut 2\").onClick((event: ClickEvent) => {\n          this.message = \"I clicked Button 2\";\n          console.info(\"I clicked 2\");\n        }).keyboardShortcut('1', [ModifierKey.CTRL])\n        Button(\"Test short cut 3\").onClick((event: ClickEvent) => {\n          this.message = \"I clicked Button 3\";\n          console.info(\"I clicked 3\");\n        }).keyboardShortcut('A', [ModifierKey.SHIFT])\n        Button(\"Test short cut 4\").onClick((event: ClickEvent) => {\n          this.message = \"I clicked Button 4\";\n          console.info(\"I clicked 4\");\n        }).keyboardShortcut(FunctionKey.F5, [], () => {\n          this.message = \"I clicked Button 4\";\n          console.info(\"I clicked user callback.\");\n        }).keyboardShortcut(FunctionKey.F3, [])\n      }\n      .width('100%')\n    }\n    .height('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 2: Binding and Unbinding Keyboard Shortcuts",
+            "description": "This example demonstrates how to bind and unbind keyboard shortcuts.",
+            "code": "@Entry\n@Component\nstruct Index {\n  @State message: string = 'disable'\n  @State shortCutEnable: boolean = false\n  @State keyValue: string = ''\n  build() {\n    Row() {\n      Column({ space: 5 }) {\n        Text('Ctrl+A is ' + this.message)\n        Button(\"Test short cut\").onClick((event: ClickEvent) => {\n          this.message = \"I clicked Button\";\n          console.info(\"I clicked\");\n        }).keyboardShortcut(this.keyValue, [ModifierKey.CTRL])\n        Button(this.message + 'shortCut').onClick((event: ClickEvent) => {\n          this.shortCutEnable = !this.shortCutEnable;\n          this.message = this.shortCutEnable ? 'enable' : 'disable';\n          this.keyValue = this.shortCutEnable ? 'a' : '';\n        })\n        Button('multi-shortcut').onClick((event: ClickEvent) => {\n          console.info('Trigger keyboard shortcut success.')\n        }).keyboardShortcut('q', [ModifierKey.CTRL])\n          .keyboardShortcut('w', [ModifierKey.CTRL])\n          .keyboardShortcut('', []) // Unbinding does not work when there are multi-bound shortcuts.\n      }\n      .width('100%')\n    }\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

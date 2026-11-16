@@ -1,0 +1,12 @@
+{
+    "title": "Counter",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-counter",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example shows the basic usage of the Counter component. Users can touch the + or - button to adjust the value.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct CounterExample {\n  @State value1: number = 0;\n  @State value2: number = 0;\n  build() {\n    Column({ space: 50 }) {\n      Counter() {\n        Text(this.value1.toString())\n      }\n      .onInc(() => {\n        this.value1++;\n      })\n      .onDec(() => {\n        this.value1--;\n      })\n      Counter() {\n        Text(this.value2.toString())\n      }\n      .onInc(() => {\n        this.value2++;\n      })\n      .onDec(() => {\n        this.value2--;\n      })\n      .enableInc(true)\n      .enableDec(false)\n    }\n    .width('100%')\n    .height('100%')\n    .justifyContent(FlexAlign.Center)\n  }\n}"
+        }
+    ]
+}

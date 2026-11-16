@@ -1,0 +1,12 @@
+{
+    "title": "SwipeGesture",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-gestures-swipegesture",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to implement swipe gesture recognition.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct SwipeGestureExample {\n  @State rotateAngle: number = 0;\n  @State speed: number = 1;\n  build() {\n    Column() {\n      Column() {\n        Text(\"SwipeGesture speed\\n\" + this.speed)\n        Text(\"SwipeGesture angle\\n\" + this.rotateAngle)\n      }\n      .border({ width: 3 })\n      .width(300)\n      .height(200)\n      .margin(100)\n      .rotate({ angle: this.rotateAngle })\n      // This event is triggered when the user swipes vertically with one finger.\n      .gesture(\n      SwipeGesture({ direction: SwipeDirection.Vertical })\n        .onAction((event: GestureEvent) => {\n          if (event) {\n            this.speed = event.speed\n            this.rotateAngle = event.angle\n          }\n        })\n      )\n    }.width('100%')\n  }\n}"
+        }
+    ]
+}

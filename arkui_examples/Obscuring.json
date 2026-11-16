@@ -1,0 +1,12 @@
+{
+    "title": "Obscuring",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-obscured",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to obscure the content of Text and Image components using the obscured API.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct ObscuredExample {\n  build() {\n    Row() {\n      Column() {\n        Text('Text not set obscured attribute').fontSize(10).fontColor(Color.Black)\n        Text('This is an example for text obscured attribute.')\n          .fontSize(30)\n          .width('600px')\n          .fontColor(Color.Black)\n          .border({ width: 1 })\n        Text('Image not set obscured attribute').fontSize(10).fontColor(Color.Black)\n        // Replace $r('app.media.icon') with the image resource file you use.\n        Image($r('app.media.icon'))\n          .width('200px')\n          .height('200px')\n        Text('Text set obscured attribute').fontSize(10).fontColor(Color.Black)\n        Text('This is an example for text obscured attribute.')\n          .fontSize(30)\n          .width('600px')\n          .fontColor(Color.Black)\n          .border({ width: 1 })\n          .obscured([ObscuredReasons.PLACEHOLDER])\n        Text('Image set obscured attribute').fontSize(10).fontColor(Color.Black)\n        // Replace $r('app.media.icon') with the image resource file you use.\n        Image($r('app.media.icon'))\n          .width('200px')\n          .height('200px')\n          .obscured([ObscuredReasons.PLACEHOLDER])\n      }\n      .width('100%')\n    }\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

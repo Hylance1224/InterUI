@@ -1,0 +1,12 @@
+{
+    "title": "NavPushPathHelper",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ohos-atomicservice-navpushpathhelper",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "Main package:",
+            "code": "// Index.ets\nimport { NavPushPathHelper } from '@kit.ArkUI';\nimport { BusinessError } from '@kit.BasicServicesKit';\n@Entry\n@Component\nstruct NavigationExample {\n  pageInfo: NavPathStack = new NavPathStack();\n  helper: NavPushPathHelper = new NavPushPathHelper(this.pageInfo);\n  build() {\n    Navigation(this.pageInfo) {\n      Column() {\n        Button('StartTest', { stateEffect: true, type: ButtonType.Capsule })\n          .width('80%')\n          .height(40)\n          .margin(20)\n          .onClick(() => {\n            this.helper.pushPath('hsptest1', { name: 'pageOne' }, false)\n              .catch((error: BusinessError) => {\n              console.error(`[pushPath]failed, error code = ${error.code}, error.message = ${error.message}.`);\n            }).then(() => {\n              console.error(`[pushPath]success.`);\n            }); // Push the NavDestination page specified by name to the navigation stack.\n          })\n      }\n    }.title('NavIndex')\n  }\n}"
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "title": "CalendarPicker",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-components-calendarpicker",
+    "example_count": 3,
+    "examples": [
+        {
+            "title": "Example 1: Implementing a Calendar Picker",
+            "description": "This example uses calendarPicker to implement the CalendarPicker component and provides a drop-down calendar.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct CalendarPickerExample {\n  private selectedDate: Date = new Date('2024-03-05');\n  build() {\n    Column() {\n      Column() {\n        CalendarPicker({ hintRadius: 10, selected: this.selectedDate })\n          .edgeAlign(CalendarAlign.END)\n          .textStyle({ color: \"#ff182431\", font: { size: 20, weight: FontWeight.Normal } })\n          .margin(10)\n          .onChange((value) => {\n            console.info(`CalendarPicker onChange: ${value.toString()}`);\n          })\n      }.alignItems(HorizontalAlign.End).width(\"100%\")\n      Text('Calendar picker').fontSize(30)\n    }.width('100%').margin({ top: 350 })\n  }\n}"
+        },
+        {
+            "title": "Example 2: Setting Start and End Dates",
+            "description": "This example demonstrates how to set the start and end dates for the calendar picker using start and end.\nSince API version 18., the start and end attributes are added to CalendarOptions.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct CalendarPickerExample {\n  private selectedDate: Date = new Date('2025-01-15');\n  private startDate: Date = new Date('2025-01-05');\n  private endDate: Date = new Date('2025-01-25');\n  build() {\n    Column() {\n      Column() {\n        CalendarPicker({ hintRadius: 10, selected: this.selectedDate, start: this.startDate, end: this.endDate })\n          .edgeAlign(CalendarAlign.END)\n          .textStyle({ color: \"#ff182431\", font: { size: 20, weight: FontWeight.Normal } })\n          .margin(10)\n          .onChange((value) => {\n            console.info(`CalendarPicker onChange: ${value.toString()}`);\n          })\n      }.alignItems(HorizontalAlign.End).width(\"100%\")\n    }.width('100%').margin({ top: 350 })\n  }\n}"
+        },
+        {
+            "title": "Example 3: Highlighting the Current System Date and Disabling a Specific Date Range",
+            "description": "This example shows how to highlight the current system date using markToday and disable a specific date range using disabledDateRange.\nSince API version 19, the markToday API is added, and the disabledDateRange attribute is added to CalendarOptions.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct CalendarPickerExample {\n  private disabledDateRange: DateRange[] = [\n    { start: new Date('2025-01-01'), end: new Date('2025-01-02') },\n    { start: new Date('2025-01-09'), end: new Date('2025-01-10') },\n    { start: new Date('2025-01-15'), end: new Date('2025-01-16') },\n    { start: new Date('2025-01-19'), end: new Date('2025-01-19') },\n    { start: new Date('2025-01-22'), end: new Date('2025-01-25') }\n  ];\n  build() {\n    Column() {\n      CalendarPicker({ disabledDateRange: this.disabledDateRange })\n        .margin(10)\n        .markToday(true)\n        .onChange((value) => {\n          console.info(`CalendarPicker onChange: ${value.toString()}`);\n        })\n    }.alignItems(HorizontalAlign.End).width('100%')\n  }\n}"
+        }
+    ]
+}

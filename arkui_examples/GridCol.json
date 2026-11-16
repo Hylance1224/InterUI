@@ -1,0 +1,17 @@
+{
+    "title": "GridCol",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-gridcol",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "GridColColumnOption",
+            "description": "Describes the numbers of grid columns occupied by the GridCol component on devices with different width types.",
+            "code": "span: {xs:2, md:4, lg:8} // Equivalent to span: {xs:2, sm:2, md:4, lg:8, xl:8, xxl:8}.\nspan: {md:4, lg:8} // Equivalent to span: {xs:1, sm:1, md:4, lg:8, xl:8, xxl:8}."
+        },
+        {
+            "title": "Example",
+            "description": "This example demonstrates the basic usage of GridCol.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct GridColExample {\n  @State bgColors: Color[] =\n    [Color.Red, Color.Orange, Color.Yellow, Color.Green, Color.Pink, Color.Grey, Color.Blue, Color.Brown]\n  @State currentBp: string = 'unknown'\n  build() {\n    Column() {\n      GridRow({\n        columns: 5,\n        gutter: { x: 5, y: 10 },\n        breakpoints: {\n          value: ['400vp', '600vp', '800vp'],\n          reference: BreakpointsReference.WindowSize\n        },\n        direction: GridRowDirection.Row\n      }) {\n        ForEach(this.bgColors, (color: Color) => {\n          GridCol({\n            span: { xs: 1, sm: 2, md: 3, lg: 4 },\n            offset: 0,\n            order: 0\n          }) {\n            Row().width('100%').height('20vp')\n          }.borderColor(color).borderWidth(2)\n        })\n      }.width('100%').height('100%')\n      .onBreakpointChange((breakpoint) => {\n        this.currentBp = breakpoint\n      })\n    }.width('80%').margin({ left: 10, top: 5, bottom: 5 }).height(200)\n    .border({ color: '#880606', width: 2 })\n  }\n}"
+        }
+    ]
+}

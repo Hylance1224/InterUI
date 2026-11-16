@@ -1,0 +1,12 @@
+{
+    "title": "Visibility Control",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-visibility",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to use the visibility configuration to achieve different visibility control effects.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct VisibilityExample {\n  build() {\n    Column() {\n      Column() {\n        // The component is hidden and does not take up space in the layout.\n        Text('None').fontSize(9).width('90%').fontColor(0xCCCCCC)\n        Row().visibility(Visibility.None).width('90%').height(80).backgroundColor(0xAFEEEE)\n        // The component is hidden but takes up space in the layout.\n        Text('Hidden').fontSize(9).width('90%').fontColor(0xCCCCCC)\n        Row().visibility(Visibility.Hidden).width('90%').height(80).backgroundColor(0xAFEEEE)\n        // The component is visible, which is the default display mode.\n        Text('Visible').fontSize(9).width('90%').fontColor(0xCCCCCC)\n        Row().visibility(Visibility.Visible).width('90%').height(80).backgroundColor(0xAFEEEE)\n      }.width('90%').border({ width: 1 })\n    }.width('100%').margin({ top: 5 })\n  }\n}"
+        }
+    ]
+}

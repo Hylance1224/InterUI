@@ -1,0 +1,12 @@
+{
+    "title": "Motion Path Animation (motionPath)",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-motion-path-animation",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to animate a component along a custom path.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct MotionPathExample {\n  @State toggle: boolean = true;\n  build() {\n    Column() {\n      Button('click me').margin(50)\n        .motionPath({\n          path: 'Mstart.x start.y L300 200 L300 500 Lend.x end.y',\n          from: 0.0,\n          to: 1.0,\n          rotatable: true\n        }) // Execute the animation: Move from the start point to (300,200), then to (300,500), and finally to the end point.\n        .onClick(() => {\n          this.getUIContext()?.animateTo({ duration: 4000, curve: Curve.Linear }, () => {\n            this.toggle = !this.toggle; // Change the component's position using this.toggle.\n          });\n        })\n    }.width('100%').height('100%').alignItems(this.toggle ? HorizontalAlign.Start : HorizontalAlign.Center)\n  }\n}"
+        }
+    ]
+}

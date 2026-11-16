@@ -1,0 +1,12 @@
+{
+    "title": "RichText",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-components-richtext",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "You can preview how this component looks on a real device, but not in DevEco Studio Previewer.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct RichTextExample {\n  @State data: string = '<h1 style=\"text-align: center;\">h1 heading</h1>' +\n  '<h1 style=\"text-align: center;\"><i>h1 italic</i></h1>' +\n  '<h1 style=\"text-align: center;\"><u>h1 underlined</u></h1>' +\n  '<h2 style=\"text-align: center;\">h2 heading</h2>' +\n  '<h3 style=\"text-align: center;\">h3 heading</h3>' +\n  '<p style=\"text-align: center;\">Regular paragraph</p><hr/>' +\n  '<div style=\"width: 500px;height: 500px;border: 1px solid;margin: 0 auto;\">' +\n  '<p style=\"font-size: 35px;text-align: center;font-weight: bold; color: rgb(24,78,228)\">Font size: 35px; line height: 45px</p>' +\n  '<p style=\"background-color: #e5e5e5;line-height: 45px;font-size: 35px;text-indent: 2em;\">' +\n  '<p>This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph. This is a paragraph.</p>';\n  build() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center,\n      justifyContent: FlexAlign.Center }) {\n      RichText(this.data)\n        .onStart(() => {\n          console.info('RichText onStart');\n        })\n        .onComplete(() => {\n          console.info('RichText onComplete');\n        })\n        .width(500)\n        .height(500)\n        .backgroundColor(0XBDDB69)\n      RichText('layoutWeight(1)')\n        .onStart(() => {\n          console.info('RichText onStart');\n        })\n        .onComplete(() => {\n          console.info('RichText onComplete');\n        })\n        .size({ width: '100%', height: 110 })\n        .backgroundColor(0X92D6CC)\n        .layoutWeight(1)\n      RichText('layoutWeight(2)')\n        .onStart(() => {\n          console.info('RichText onStart');\n        })\n        .onComplete(() => {\n          console.info('RichText onComplete');\n        })\n        .size({ width: '100%', height: 110 })\n        .backgroundColor(0X92C48D)\n        .layoutWeight(2)\n    }\n  }\n}"
+        }
+    ]
+}

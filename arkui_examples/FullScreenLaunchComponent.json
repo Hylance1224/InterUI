@@ -1,0 +1,12 @@
+{
+    "title": "FullScreenLaunchComponent",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ohos-arkui-advanced-fullscreenlaunchcomponent",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates component usage with extended atomic service capabilities. In real-world development, replace the sample appId with the actual app ID of the atomic service.\nFullScreenLaunchComponent needs to be invoked by the user. After the provider completes local installation, the component can be launched in full-screen embedded mode within the user app or atomic service.\nUser Implementation",
+            "code": "// The entry point file Index.ets for the user side is as follows:\nimport { FullScreenLaunchComponent } from '@kit.ArkUI';\n@Entry\n@Component\nstruct Index {\n  @State appId: string = '6917573653426122083'; // App ID of the atomic service.\n  build() {\n    Row() {\n      Column() {\n        FullScreenLaunchComponent({\n          content: ColumnChild,\n          appId: this.appId,\n          options: {},\n          onTerminated: (info) => {\n            console.info(`onTerminated code: ${info.code.toString()}`);\n          },\n          onError: (err) => {\n            console.error(`onError code: ${err.code}, message: ${err.message}`);\n          },\n          onReceive: (data) => {\n            console.info(`onReceive, data: ${JSON.stringify(data)}`);\n          }\n        }).width(\"80vp\").height(\"80vp\")\n      }\n      .width('100%')\n    }\n    .height('100%')\n  }\n}\n@Builder\nfunction ColumnChild() {\n  Column() {\n    Image($r('app.media.startIcon'))\n    Text('test')\n  }\n}"
+        }
+    ]
+}

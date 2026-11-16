@@ -1,0 +1,12 @@
+{
+    "title": "SideBarContainer",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-sidebarcontainer",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to use the SideBarContainer component and implement the page layout.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct SideBarContainerExample {\n  // Replace $r(\"app.media.icon\") with the image resource file you use.\n  normalIcon: Resource = $r(\"app.media.icon\");\n  selectedIcon: Resource = $r(\"app.media.icon\");\n  @State arr: number[] = [1, 2, 3];\n  @State current: number = 1;\n  build() {\n    SideBarContainer(SideBarContainerType.Embed) {\n      Column() {\n        ForEach(this.arr, (item: number) => {\n          Column({ space: 5 }) {\n            Image(this.current === item ? this.selectedIcon : this.normalIcon).width(64).height(64)\n            Text(\"Index0\" + item)\n              .fontSize(25)\n              .fontColor(this.current === item ? '#0A59F7' : '#999')\n              .fontFamily('source-sans-pro,cursive,sans-serif')\n          }\n          .onClick(() => {\n            this.current = item;\n          })\n        }, (item: string) => item)\n      }.width('100%')\n      .justifyContent(FlexAlign.SpaceEvenly)\n      .backgroundColor('#19000000')\n      Column() {\n        Text('SideBarContainer content text1').fontSize(25)\n        Text('SideBarContainer content text2').fontSize(25)\n      }\n      .margin({ top: 50, left: 20, right: 30 })\n    }\n    .controlButton({\n      icons: {\n        // Replace $r('app.media.drawer') with the image resource file you use.\n        hidden: $r('app.media.drawer'),\n        shown: $r('app.media.drawer'),\n        switching: $r('app.media.drawer')\n      }\n    })\n    .sideBarWidth(150)\n    .minSideBarWidth(50)\n    .maxSideBarWidth(300)\n    .minContentWidth(0)\n    .onChange((value: boolean) => {\n      console.info('status:' + value);\n    })\n    .divider({ strokeWidth: '1vp', color: Color.Gray, startMargin: '4vp', endMargin: '4vp' })\n  }\n}"
+        }
+    ]
+}

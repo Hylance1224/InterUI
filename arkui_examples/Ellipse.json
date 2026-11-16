@@ -1,0 +1,22 @@
+{
+    "title": "Ellipse",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-drawing-components-ellipse",
+    "example_count": 3,
+    "examples": [
+        {
+            "title": "Example 1: Drawing an Ellipse",
+            "description": "This example demonstrates how to use fillOpacity and stroke to set the opacity and stroke color of an ellipse.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct EllipseExample {\n  build() {\n    Column({ space: 10 }) {\n      // Draw a 150 x 80 ellipse.\n      Ellipse({ width: 150, height: 80 })\n      // Draw a 150 x 100 ellipse with blue strokes.\n      Ellipse()\n        .width(150)\n        .height(100)\n        .fillOpacity(0)\n        .stroke(Color.Blue)\n        .strokeWidth(3)\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 2: Drawing an Ellipse with Different Parameter Types for Width and Height",
+            "description": "This example demonstrates how to draw an ellipse using different length types of the width and height attributes.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct EllipseTypeExample {\n  build() {\n    Column({ space: 10 }) {\n      // Draw a 150 x 80 ellipse.\n      Ellipse({ width: '150', height: '80' }) // Use the string type.\n      // Draw an ellipse of 80 × 150.\n      Ellipse({ width: 80, height: 150 }) // Use the number type.\n      // Draw an ellipse of 150 × 150.\n      Ellipse({ width: $r('app.string.EllipseWidth'), height: $r('app.string.EllipseHeight') }) // Use the Resource type, which needs to be customized.\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 3: Dynamically Setting Attributes of the Ellipse Component Using attributeModifier",
+            "description": "This example shows how to use attributeModifier to dynamically set the fill, fillOpacity, stroke, strokeDashArray, strokeDashOffset, strokeLineCap, strokeOpacity, strokeWidth, and antiAlias attributes of the Ellipse component.",
+            "code": "// xxx.ets\nclass MyEllipseModifier implements AttributeModifier<EllipseAttribute> {\n  applyNormalAttribute(instance: EllipseAttribute): void {\n    // Fill color: #707070; fill opacity: 0.5; stroke color: #2787D9; stroke dash array: [20]; offset to left: 15; cap style: semi-circle; stroke opacity: 0.5; stroke width: 10; anti-aliasing enabled.\n    instance.fill(\"#707070\")\n    instance.fillOpacity(0.5)\n    instance.stroke(\"#2787D9\")\n    instance.strokeDashArray([20])\n    instance.strokeDashOffset(\"15\")\n    instance.strokeLineCap(LineCapStyle.Round)\n    instance.strokeOpacity(0.5)\n    instance.strokeWidth(10)\n    instance.antiAlias(true)\n  }\n}\n@Entry\n@Component\nstruct EllipseModifierDemo {\n  @State modifier: MyEllipseModifier = new MyEllipseModifier()\n  build() {\n    Column() {\n      Ellipse({ width: 150, height: 80 })\n        .attributeModifier(this.modifier)\n        .offset({ x: 20, y: 20 })\n    }\n  }\n}"
+        }
+    ]
+}

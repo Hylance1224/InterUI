@@ -1,0 +1,17 @@
+{
+    "title": "ColumnSplit",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-columnsplit",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Setting the Resizable ColumnSplit Component",
+            "description": "This example shows how to set the resizable ColumnSplit component and its effect.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct ColumnSplitExample {\n  build() {\n    Column(){\n      Text('The dividing line can be dragged').fontSize(9).fontColor(0xCCCCCC).width('90%')\n      ColumnSplit() {\n        Text('1').width('100%').height(50).backgroundColor(0xF5DEB3).textAlign(TextAlign.Center)\n        Text('2').width('100%').height(50).backgroundColor(0xD2B48C).textAlign(TextAlign.Center)\n        Text('3').width('100%').height(50).backgroundColor(0xF5DEB3).textAlign(TextAlign.Center)\n        Text('4').width('100%').height(50).backgroundColor(0xD2B48C).textAlign(TextAlign.Center)\n        Text('5').width('100%').height(50).backgroundColor(0xF5DEB3).textAlign(TextAlign.Center)\n      }\n      .borderWidth(1)\n      .resizeable(true) // The divider can be dragged.\n      .width('90%').height('60%')\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 2: Setting the ColumnSplit Component with Spacing",
+            "description": "This example shows how to set the ColumnSplit component with spacing and its effect.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct ColumnSplitDividerExample {\n  build() {\n    Column() {\n      Text('The dividing line can be dragged').fontSize(9).fontColor(0xCCCCCC).width('90%')\n      ColumnSplit() {\n        Text('1').width('100%').height(50).backgroundColor(0xF5DEB3).textAlign(TextAlign.Center)\n        Text('2').width('100%').height(50).backgroundColor(0xD2B48C).textAlign(TextAlign.Center)\n        Text('3').width('100%').height(50).backgroundColor(0xF5DEB3).textAlign(TextAlign.Center)\n        Text('4').width('100%').height(50).backgroundColor(0xD2B48C).textAlign(TextAlign.Center)\n        Text('5').width('100%').height(50).backgroundColor(0xF5DEB3).textAlign(TextAlign.Center)\n      }\n      .borderWidth(1)\n      .divider({ startMargin: 5, endMargin: 5 }) // Set the spacing.\n      .width('90%')\n      .height('60%')\n    }.width('100%')\n  }\n}"
+        }
+    ]
+}

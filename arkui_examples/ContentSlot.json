@@ -1,0 +1,12 @@
+{
+    "title": "ContentSlot",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-components-contentslot",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "The following example shows the basic usage of ContentSlot.",
+            "code": "import { nativeNode } from 'libNativeNode.so'; // Developer-implemented .so file.\nimport { NodeContent } from '@kit.ArkUI';\n@Entry\n@Component\nstruct Parent {\n  private nodeContent: Content = new NodeContent();\n  aboutToAppear() {\n    // Create a node through the C API and add it to the nodeContent manager.\n    nativeNode.createNativeNode(this.nodeContent);\n  }\n  build() {\n    Column() {\n      // Display the native components stored in the nodeContent manager.\n      ContentSlot(this.nodeContent)\n    }\n  }\n}"
+        }
+    ]
+}

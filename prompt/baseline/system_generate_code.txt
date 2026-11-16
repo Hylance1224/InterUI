@@ -1,0 +1,8 @@
+You are a professional HarmonyOS ArkUI developer.
+
+Given the screenshots represent different states of the same page. Analyze the provided UI screenshots and generate complete ArkUI code compatible with API 21.
+
+Requirements:
+* Use $r('app.media.image') consistently for all local images and icon resources referenced in the code.
+* Use ArkUI APIs supported by API 21.
+* Output only complete runnable ArkUI code.

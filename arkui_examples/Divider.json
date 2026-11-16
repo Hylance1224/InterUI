@@ -1,0 +1,17 @@
+{
+    "title": "Divider",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-components-divider",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Configuring the Divider Direction, Color, and Stroke Width",
+            "description": "This example demonstrates how to configure a divider's direction, color, and stroke width.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct DividerExample {\n  build() {\n    Column() {\n      // Use horizontal dividers.\n      Text('Horizontal divider').fontSize(9).fontColor(0xCCCCCC)\n      List() {\n        ForEach([1, 2, 3], (item: number) => {\n          ListItem() {\n            Text('list' + item).width('100%').fontSize(14).fontColor('#182431').textAlign(TextAlign.Start)\n          }.width(244).height(48)\n        }, (item: number) => item.toString())\n      }.padding({ left: 24, bottom: 8 })\n      Divider().strokeWidth(8).color('#F1F3F5')\n      List() {\n        ForEach([4, 5], (item: number) => {\n          ListItem() {\n            Text('list' + item).width('100%').fontSize(14).fontColor('#182431').textAlign(TextAlign.Start)\n          }.width(244).height(48)\n        }, (item: number) => item.toString())\n      }.padding({ left: 24, top: 8 })\n      // Use vertical dividers.\n      Text('Vertical divider').fontSize(9).fontColor(0xCCCCCC)\n      Column() {\n        Column() {\n          Row().width(288).height(64).backgroundColor('#30C9F0').opacity(0.3)\n          Row() {\n            Button('Button')\n              .width(136)\n              .height(22)\n              .fontSize(16)\n              .fontColor('#007DFF')\n              .fontWeight(500)\n              .backgroundColor(Color.Transparent)\n            Divider()\n              .vertical(true)\n              .height(22)\n              .color('#182431')\n              .opacity(0.6)\n              .margin({ left: 8, right: 8 })\n            Button('Button')\n              .width(136)\n              .height(22)\n              .fontSize(16)\n              .fontColor('#007DFF')\n              .fontWeight(500)\n              .backgroundColor(Color.Transparent)\n          }.margin({ top: 17 })\n        }\n        .width(336)\n        .height(152)\n        .backgroundColor('#FFFFFF')\n        .borderRadius(24)\n        .padding(24)\n      }\n      .width('100%')\n      .height(168)\n      .backgroundColor('#F1F3F5')\n      .justifyContent(FlexAlign.Center)\n      .margin({ top: 8 })\n    }.width('100%').padding({ top: 24 })\n  }\n}"
+        },
+        {
+            "title": "Example 2: Configuring the Divider Line Cap Style",
+            "description": "This example shows how to define the line cap style for a divider.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct DividerExample {\n  build() {\n    Column({space:30}) {\n      Text(\"LineCap:Butt\")\n      Divider()\n        .strokeWidth(20)\n        .width(\"90%\")\n        .color('#F1F3F5')\n        .lineCap(LineCapStyle.Butt)\n      Text(\"LineCap:Round\")\n      Divider()\n        .strokeWidth(20)\n        .width(\"90%\")\n        .color('#F1F3F5')\n        .lineCap(LineCapStyle.Round)\n      Text(\"LineCap:Square\")\n      Divider()\n        .strokeWidth(20)\n        .width(\"90%\")\n        .color('#F1F3F5')\n        .lineCap(LineCapStyle.Square)\n    }.width('100%').padding({ top: 24 })\n  }\n}"
+        }
+    ]
+}

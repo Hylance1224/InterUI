@@ -1,0 +1,12 @@
+{
+    "title": "MultiNavigation",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ohos-arkui-advanced-multinavigation",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates the basic usage of MultiNavigation.",
+            "code": "// pages/Index.ets\nimport { MultiNavigation, MultiNavPathStack, SplitPolicy } from '@kit.ArkUI';\nimport { PageDetail1 } from './PageDetail1';\nimport { PageDetail2 } from './PageDetail2';\nimport { PageFull1 } from './PageFull1';\nimport { PageHome1 } from './PageHome1';\nimport { PagePlaceholder } from './PagePlaceholder';\n@Entry\n@Component\nstruct Index {\n  @Provide('pageStack') pageStack: MultiNavPathStack = new MultiNavPathStack();\n  @Builder\n  PageMap(name: string, param?: object) {\n    if (name === 'PageHome1') {\n      PageHome1({ param: param });\n    } else if (name === 'PageDetail1') {\n      PageDetail1({ param: param });\n    } else if (name === 'PageDetail2') {\n      PageDetail2({ param: param });\n    } else if (name === 'PageFull1') {\n      PageFull1();\n    } else if (name === 'PagePlaceholder') {\n      PagePlaceholder();\n    }\n  }\n  aboutToAppear(): void {\n    this.pageStack.pushPathByName('PageHome1', 'paramTest', false, SplitPolicy.HOME_PAGE);\n  }\n  build() {\n    Column() {\n      Row() {\n        MultiNavigation({ navDestination: this.PageMap, multiStack: this.pageStack })\n      }\n      .width('100%')\n    }\n  }\n}"
+        }
+    ]
+}

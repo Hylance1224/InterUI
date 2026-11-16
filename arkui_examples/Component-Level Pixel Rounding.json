@@ -1,0 +1,12 @@
+{
+    "title": "Component-Level Pixel Rounding",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-pixelroundforcomponent",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example shows how to use pixelRound to guide layout adjustments when there is a 1 px gap in the parent component.",
+            "code": "@Entry\n@Component\nstruct PixelRoundExample {\n    @State curWidth : number = 300;\n    build() {\n        Column() {\n            Button(){\n                Text(this.curWidth.toString())\n            }\n            .onClick(() => {\n                this.curWidth += 0.1;\n            })\n            .height(200)\n            .width(200)\n            .backgroundColor('rgb(213, 213, 213)')\n            Blank().height(20)\n            Row() {\n                Row() {\n                }\n                .width('100%')\n                .height('100%')\n                .backgroundColor(Color.Yellow)\n                .pixelRound({\n                    start : PixelRoundCalcPolicy.NO_FORCE_ROUND,\n                    end : PixelRoundCalcPolicy.NO_FORCE_ROUND,\n                })\n            }\n            .width(this.curWidth.toString() + 'px')\n            .height('300.6px')\n            .backgroundColor(Color.Red)\n            .pixelRound({\n                start : PixelRoundCalcPolicy.NO_FORCE_ROUND,\n                end : PixelRoundCalcPolicy.NO_FORCE_ROUND,\n            })\n        }\n        .width(\"100%\")\n        .height('100%')\n        .backgroundColor('#ffe5e5e5')\n    }\n}"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "title": "Component3D",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-components-component3d",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "You can preview how this component looks on a real device, but not in DevEco Studio Previewer.\nExample of loading a GLTF model:",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct Index {\n  // Load scene resources, which supports .gltf and .glb formats. Adapt the path and file name to your project.\n  scene: SceneOptions = { scene: $rawfile('gltf/DamagedHelmet/glTF/DamagedHelmet.gltf'), modelType: ModelType.SURFACE};\n  build() {\n    Row() {\n      Column() {\n        Text('GLTF Example')\n        Component3D( this.scene )\n        // Bind environment resources, which supports .gltf and .glb formats. Adapt the path and file name to your project.\n          .environment($rawfile('gltf/Environment/glTF/Environment.gltf'))\n          .renderWidth('90%').renderHeight('90%')\n      }.width('100%')\n    }\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

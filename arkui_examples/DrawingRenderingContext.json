@@ -1,0 +1,17 @@
+{
+    "title": "DrawingRenderingContext",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-drawingrenderingcontext",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Drawing Shapes",
+            "description": "This example demonstrates how to draw shapes using APIs in DrawingRenderingContext.",
+            "code": "import { common2D, drawing } from '@kit.ArkGraphics2D';\n// xxx.ets\n@Entry\n@Component\nstruct CanvasExample {\n  private context: DrawingRenderingContext = new DrawingRenderingContext();\n  build() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {\n      Canvas(this.context)\n        .width('100%')\n        .height('50%')\n        .backgroundColor('#D5D5D5')\n        .onReady(() => {\n          let brush = new drawing.Brush();\n          // Draw a circle with center at (200, 200) and radius of 100, filled with RGBA(39, 135, 217, 255).\n          brush.setColor({\n            alpha: 255,\n            red: 39,\n            green: 135,\n            blue: 217\n          });\n          this.context.canvas.attachBrush(brush);\n          this.context.canvas.drawCircle(200, 200, 100);\n          this.context.canvas.detachBrush();\n          this.context.invalidate();\n        })\n      Button(\"Clear\")\n        .width('120')\n        .height('50')\n        .onClick(() => {\n          let color: common2D.Color = {\n            alpha: 0,\n            red: 0,\n            green: 0,\n            blue: 0\n          };\n          // Fill the canvas using RGBA(0, 0, 0, 0).\n          this.context.canvas.clear(color);\n          this.context.invalidate();\n        })\n    }\n    .width('100%')\n    .height('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 2: Drawing Text",
+            "description": "This example demonstrates how to draw custom text using drawTextBlob, with custom fonts loaded via makeFromRawFile (available since API version 18). When the drawing API is used, custom fonts from the rawfile directory can be loaded directly with drawing.Typeface.makeFromRawFile, eliminating the need to pre-register fonts through this.uiContext.getFont().registerFont or fontCollection.loadFontSync.",
+            "code": "import { drawing } from '@kit.ArkGraphics2D';\n// xxx.ets\n@Entry\n@Component\nstruct CanvasExample {\n  private context: DrawingRenderingContext = new DrawingRenderingContext();\n  build() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {\n      Canvas(this.context)\n        .width('100%')\n        .height('50%')\n        .backgroundColor('#D5D5D5')\n        .onReady(() => {\n          let font = new drawing.Font();\n          font.setSize(50);\n          // Load the custom font file HarmonyOS_Sans_Bold.ttf from the rawfile directory.\n          const myTypeFace = drawing.Typeface.makeFromRawFile($rawfile('HarmonyOS_Sans_Bold.ttf'));\n          font.setTypeface(myTypeFace);\n          const textBlob =\n            drawing.TextBlob.makeFromString(\"Hello World\", font, drawing.TextEncoding.TEXT_ENCODING_UTF8);\n          this.context.canvas.drawTextBlob(textBlob, 60, 100);\n          this.context.invalidate();\n        })\n    }\n    .width('100%')\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

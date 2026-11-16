@@ -1,0 +1,12 @@
+{
+    "title": "GridObjectSortComponent",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ohos-arkui-advanced-gridobjectsortcomponent",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example illustrates the basic usage of the GridObjectSortComponent component, involving component configuration initialization, data initialization, and the use of the save and cancel APIs.",
+            "code": "import { GridObjectSortComponent, GridObjectSortComponentItem, GridObjectSortComponentOptions, GridObjectSortComponentType, SymbolGlyphModifier } from '@kit.ArkUI';\n@Entry\n@Component\nstruct Index {\n  // Initialize the component data.\n  @State dataList: GridObjectSortComponentItem[] = [\n    {\n      id: 0,\n      url: $r('sys.media.ohos_save_button_filled'),\n      text: 'Download',\n      selected: true,\n      order: 3\n    },\n    {\n      id: 1,\n      url: $r('sys.media.ohos_ic_public_web'),\n      text: 'Network',\n      selected: true,\n      order: 9\n    },\n    {\n      id: 2,\n      url: $r('sys.media.ohos_ic_public_video'),\n      text: 'Video',\n      selected: false,\n      order: 1\n    },\n    {\n      id: 3,\n      symbolStyle: new SymbolGlyphModifier($r('sys.symbol.record_circle')),\n      text: 'Record',\n      selected: false,\n      order: 4\n    }\n  ]\n  // Initialize the component configuration information.\n  @State option: GridObjectSortComponentOptions = {\n    type: GridObjectSortComponentType.IMAGE_TEXT,\n    imageSize: 45,\n    normalTitle: 'Menu',\n    editTitle: 'Edit',\n    showAreaTitle: 'Drag to sort',\n    addAreaTitle: 'Tap to add'\n  }\n  build() {\n    Column() {\n      GridObjectSortComponent({\n        options: this.option,\n        dataList: this.dataList,\n        // Callback invoked when changes are saved. The data after the changes is returned.\n        onSave: (\n          select: Array<GridObjectSortComponentItem>,\n          unselect: Array<GridObjectSortComponentItem>\n        ) => {\n          // save ToDo\n        },\n        // Callback invoked when changes are canceled.\n        onCancel: () =>{\n          // cancel ToDo\n        }\n      })\n    }\n  }\n}"
+        }
+    ]
+}

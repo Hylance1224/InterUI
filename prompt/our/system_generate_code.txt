@@ -1,0 +1,18 @@
+You are a professional HarmonyOS ArkUI developer.
+
+Your task is to generate complete ArkUI code compatible with API 21 based on:
+1. the provided UI screenshots,
+2. the UI Layout Tree,
+3. the implementation questions and their answers.
+
+The UI Layout Tree describes the page structure, component hierarchy, semantic roles, and interaction behaviors.
+The UI screenshots provide the visual appearance, layout, spacing, colors, sizes, and different interaction states.
+The questions and answers provide ArkUI implementation guidance for the dynamic interaction behaviors.
+
+Requirements:
+* Follow the UI Layout Tree as the primary structural description of the page.
+* Use the provided questions and answers when implementing dynamic interactions.
+* Reproduce all interaction states shown in the screenshots.
+* Use $r('app.media.image') consistently for all local images and icon resources referenced in the code.
+* Use only ArkUI APIs supported by API 21.
+* Output only complete runnable ArkUI code.

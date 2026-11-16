@@ -1,0 +1,17 @@
+{
+    "title": "Accessibility Control Actions",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-accessibility-event",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Setting onAccessibilityActionIntercept to Intercept Click Events",
+            "description": "The example demonstrates how to use the onAccessibilityActionIntercept event to intercept a click event on a Toggle component in accessibility mode before the click event is processed.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct SwitchBootcamp {\n  @State private isOn: boolean = false;\n  build() {\n    NavDestination() {\n      Column() {\n        Text('onTouchIntercept')\n        Row() {\n          Text('Label message')\n          Blank()\n          Toggle({ type: ToggleType.Switch, isOn: $$this.isOn })\n            .onAccessibilityActionIntercept((action : AccessibilityAction) => {\n              if (action === AccessibilityAction.ACCESSIBILITY_CLICK) {\n                this.getUIContext().showAlertDialog({\n                  title: 'Title',\n                  message: 'Message content',\n                  primaryButton: {\n                    value: 'OK',\n                    action: () => {\n                      this.isOn = !this.isOn;\n                    }\n                  },\n                  secondaryButton: {\n                    value: 'Cancel',\n                    action: () => {\n                    }\n                  }\n                })\n                return AccessibilityActionInterceptResult.ACTION_INTERCEPT;\n              } else {\n                return AccessibilityActionInterceptResult.ACTION_CONTINUE;\n              }\n            })\n        }.width('100%')\n      }\n      .padding(24)\n      .width('100%')\n    }\n  }\n}"
+        },
+        {
+            "title": "Example 2: Setting the onAccessibilityFocus Callback",
+            "description": "Since API version 18, this callback is triggered when the focus status changes. This example demonstrates the basic usage of onAccessibilityFocus. When the focus is on onAccessibilityFocus takes effect, [testingTag] isFocus current is true is logged. When the focus is on any other area, [testingTag] isFocus current is false is logged.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct OnAccessibilityFocusExample {\n  build() {\n    NavDestination() {\n      Column() {\n        Text(\"onAccessibilityFocus doesn't take effect\")\n        Text(\"onAccessibilityFocus takes effect\")\n        .onAccessibilityFocus((isFocus)=>{\n          console.info('[testingTag] isFocus current is ${isFocus}')\n          })\n      }\n      .padding(24)\n      .width('100%')\n    }\n  }\n}"
+        }
+    ]
+}

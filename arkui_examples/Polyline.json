@@ -1,0 +1,22 @@
+{
+    "title": "Polyline",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-drawing-components-polyline",
+    "example_count": 3,
+    "examples": [
+        {
+            "title": "Example 1: Drawing a Polyline",
+            "description": "This example demonstrates how to use points, fillOpacity, stroke, strokeLineJoin, and strokeLineCap to draw a polyline with specific coordinates, opacity, stroke colors, corner styles, and endpoint styles.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct PolylineExample {\n  build() {\n    Column({ space: 10 }) {\n      // Draw a polyline in a 100 × 100 rectangle. The start point is (0, 0), the end point is (100, 100), and the passing point is (20,60).\n      Polyline({ width: 100, height: 100 })\n        .points([[0, 0], [20, 60], [100, 100]])\n        .fillOpacity(0)\n        .stroke(Color.Blue)\n        .strokeWidth(3)\n      // Draw a polyline in a 100 × 100 rectangle. The start point is (20, 0), the end point is (100, 90), and the passing point is (0,100).\n      Polyline()\n        .width(100)\n        .height(100)\n        .fillOpacity(0)\n        .stroke(Color.Red)\n        .strokeWidth(8)\n        .points([[20, 0], [0, 100], [100, 90]])\n        // Set the join style of the stroke to a rounded corner.\n        .strokeLineJoin(LineJoinStyle.Round)\n        // Set the cap style of the stroke to a half circle.\n        .strokeLineCap(LineCapStyle.Round)\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 2: Drawing a Polyline with Different Parameter Types for Width and Height",
+            "description": "This example demonstrates how to draw a polyline using different length types of the width and height attributes.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct PolylineTypeExample {\n  build() {\n    Column({ space: 10 }) {\n      // Draw a polyline in a 100 × 100 rectangle. The start point is (0, 0), the end point is (100, 100), and the passing point is (20,60).\n      Polyline({ width: '100', height: '100' }) // Use the string type.\n        .points([[0, 0], [20, 60], [100, 100]])\n        .fillOpacity(0)\n        .stroke(Color.Blue)\n        .strokeWidth(3)\n      Polyline({ width: 100, height: 100 }) // Use the number type.\n        .points([[0, 0], [20, 60], [100, 100]])\n        .fillOpacity(0)\n        .stroke(Color.Blue)\n        .strokeWidth(3)\n      Polyline({ width: $r('app.string.PolylineWidth'), height: $r('app.string.PolylineHeight') }) // Use the Resource type, which needs to be customized.\n        .points([[0, 0], [20, 60], [100, 100]])\n        .fillOpacity(0)\n        .stroke(Color.Blue)\n        .strokeWidth(3)\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 3: Dynamically Setting Attributes of the Polyline Component Using attributeModifier",
+            "description": "This example shows how to use attributeModifier to dynamically set the points, fill, fillOpacity, stroke, strokeDashArray, strokeDashOffset, strokeLineCap, strokeLineJoin, strokeMiterLimit, strokeOpacity, strokeWidth, and antiAlias attributes of the Polyline component.",
+            "code": "// xxx.ets\nclass MyPolylineModifier implements AttributeModifier<PolylineAttribute> {\n  applyNormalAttribute(instance: PolylineAttribute): void {\n    // Line starting at (0, 0), passing through (50, 100), and ending at (100, 0). Fill color: #707070; fill opacity: 0.5; stroke color: #2787D9; stroke dash array: [20]; offset to left: 15; cap style: semi-circle; join style: miter; miter limit: 5; stroke opacity: 0.5; stroke width: 10; anti-aliasing enabled.\n    instance.points([[0, 0], [50, 100], [100, 0]])\n    instance.fill(\"#707070\")\n    instance.fillOpacity(0.5)\n    instance.stroke(\"#2787D9\")\n    instance.strokeDashArray([20])\n    instance.strokeDashOffset(\"15\")\n    instance.strokeLineCap(LineCapStyle.Round)\n    instance.strokeLineJoin(LineJoinStyle.Miter)\n    instance.strokeMiterLimit(5)\n    instance.strokeOpacity(0.5)\n    instance.strokeWidth(10)\n    instance.antiAlias(true)\n  }\n}\n@Entry\n@Component\nstruct PolylineModifierDemo {\n  @State modifier: MyPolylineModifier = new MyPolylineModifier()\n  build() {\n    Column() {\n      Polyline()\n        .width(100)\n        .height(100)\n        .attributeModifier(this.modifier)\n        .offset({ x: 20, y: 20 })\n    }\n  }\n}"
+        }
+    ]
+}

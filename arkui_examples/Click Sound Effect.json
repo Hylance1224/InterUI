@@ -1,0 +1,12 @@
+{
+    "title": "Click Sound Effect",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-click-sound",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example 1: Enabling the Default Click Sound Effect",
+            "description": "This example disables the default click sound effect by setting the enableClickSoundEffect attribute. You can call audio-related APIs in the onClick callback to customize the sound effect. For details, see Using SoundPool to Play Short Sounds.\nThe enableClickSoundEffect attribute is added since API version 24.",
+            "code": "@Entry\n@Component\nstruct Index {\n  build() {\n    Column() {\n      Button('Click')\n        .fontSize('20dp')\n        .height('60')\n        .width('200')\n        .enableClickSoundEffect(false)\n        .onClick(() => {\n          // Customize the sound effect. For details, see the guide of using SoundPool.\n        })\n    }\n    .width('100%')\n    .height('100%')\n    .justifyContent(FlexAlign.Center)\n    .alignItems(HorizontalAlign.Center)\n  }\n}"
+        }
+    ]
+}

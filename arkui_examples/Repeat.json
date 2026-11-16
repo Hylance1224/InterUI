@@ -1,0 +1,52 @@
+{
+    "title": "Repeat",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-rendering-control-repeat",
+    "example_count": 9,
+    "examples": [
+        {
+            "title": "Repeat: <T>(arr: Array<T>)",
+            "description": "Widget capability: This API can be used in ArkTS widgets since API version 12.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "// arr is an array of the Array<string> type, which is used as the data source for Repeat.\nRepeat<string>(this.arr)"
+        },
+        {
+            "title": "each",
+            "description": "each(itemGenerator: (repeatItem: RepeatItem<T>) => void)\nComponent generator. When the return value of .templateId() does not match any .template() type (that is, the current item does not match any defined template style), the data item is processed using .each().\nThe each property is mandatory. If it is omitted, runtime errors will occur.\nThe itemGenerator parameter is of the RepeatItem type, which combines item and index. Do not destructure RepeatItem.\nThis API cannot be called within attributeModifier.\nWidget capability: This API can be used in ArkTS widgets since API version 12.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "// Create a Text component for each item in the arr array of the Array<string> type.\nRepeat<string>(this.arr)\n  .each((obj: RepeatItem<string>) => { Text(obj.item) })"
+        },
+        {
+            "title": "key",
+            "description": "key(keyGenerator: (item: T, index: number) => string)\nKey generator.\nThis API cannot be called within attributeModifier.\nWidget capability: This API can be used in ArkTS widgets since API version 12.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nKey generator.\nitem: data item in the arr array. It is optional.\nindex: index of a data item in the arr array. It is optional.\nExample",
+            "code": "// Create a Text component for each item in the arr array of the Array<string> type.\n// Use the string value as its key.\nRepeat<string>(this.arr)\n  .each((obj: RepeatItem<string>) => { Text(obj.item) })\n  .key((obj: string) => obj)"
+        },
+        {
+            "title": "virtualScroll",
+            "description": "virtualScroll(virtualScrollOptions?: VirtualScrollOptions)\nEnables virtual scrolling for Repeat.\nThis API cannot be called within attributeModifier.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "// Create a Text component for each item in the arr array of the Array<string> type.\n// Use Repeat in a List container component with virtual scrolling enabled.\nList() {\n  Repeat<string>(this.arr)\n    .each((obj: RepeatItem<string>) => { ListItem() { Text(obj.item) }})\n    .virtualScroll()\n}"
+        },
+        {
+            "title": "template",
+            "description": "template(type: string, itemBuilder: RepeatItemBuilder<T>, templateOptions?: TemplateOptions)\nRenders the corresponding template child component based on the template type.\nThis API cannot be called within attributeModifier.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "// arr is an array of the Array<string> type.\n// Use Repeat in a List container component with virtual scrolling enabled.\n// Define a reusable template temp for generating Text components.\nList() {\n  Repeat<string>(this.arr)\n    .each((obj: RepeatItem<string>) => {})\n    .virtualScroll()\n    .template('temp', (obj: RepeatItem<string>) => { ListItem() { Text(obj.item) }})\n}"
+        },
+        {
+            "title": "templateId",
+            "description": "templateId(typedFunc: TemplateTypedFunc<T>)\nAssigns a template type for this data item.\nThis API cannot be called within attributeModifier.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "// arr is an array of the Array<string> type.\n// Use Repeat in a List container component with virtual scrolling enabled.\n// Define a reusable template temp for generating Text components.\n// Use the temp template for all data items.\nList() {\n  Repeat<string>(this.arr)\n    .each((obj: RepeatItem<string>) => {})\n    .virtualScroll()\n    .template('temp', (obj: RepeatItem<string>) => { ListItem() { Text(obj.item) }})\n    .templateId((item: string, index: number) => { return 'temp' })\n}"
+        },
+        {
+            "title": "Properties",
+            "description": "Atomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nExpected total number of data items to be loaded, which may not be equal to the data source length (length of the array passed to Repeat).\nValue range: natural numbers\nIf totalCount is not specified or exceeds the value range, totalCount takes the value of the data source length, and the list scrolls normally.\nIf totalCount is set to 0, no data is loaded.\nIf the value of totalCount is in the range (0, Data source length], only data in the range [0, totalCount – 1] is rendered on the GUI.\nIf the value of totalCount is greater than the data source length, the Repeat component renders data in the range [0, totalCount – 1], and the scrollbar style of the container component changes according to the value of totalCount. During the scrolling of the container component, the application must ensure that subsequent data is requested before the list is about to reach the end of the data source. You need to handle error scenarios (such as network delays) for data requests until all data sources are loaded; otherwise, scrolling exceptions may occur during list scrolling. You are advised to use onLazyLoading to implement lazy loading.\nIn addition to the totalCount attribute, you can also use the onTotalCount method to set a custom method to calculate the expected total number of data items to be loaded.\nAtomic service API: This API can be used in atomic services since API version 12.\nWhether to enable the reuse feature.\ntrue: Enable the reuse feature.\nfalse: Disable the reuse feature.\nDefault value: true.\nAtomic service API: This API can be used in atomic services since API version 18.\nExample",
+            "code": "// arr is an array of the Array<string> type. Use Repeat in a List container component with virtual scrolling enabled.\n// Set the total number of data items to the length of the data source and enable component reuse.\nList() {\n  Repeat<string>(this.arr)\n    .each((obj: RepeatItem<string>) => { ListItem() { Text(obj.item) }})\n    .virtualScroll( { totalCount: this.arr.length, reusable: true } )\n}"
+        },
+        {
+            "title": "onLazyLoading19+",
+            "description": "onLazyLoading?(index: number): void\n(Optional) Lazily loads data at a specified index. You need to provide a data loading method.\nThe onLazyLoading method must be used in lazy loading scenarios. You can implement a custom method to write data to a specified index in the data source. The processing rules for onLazyLoading are as follows:\nAtomic service API: This API can be used in atomic services since API version 19.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nIndex of the data item to be loaded.\nValue range: natural numbers\nExample",
+            "code": "// Assume that the total number of items is 100, and 3 items are needed for the initial screen rendering.\n// The initial array provides the first 3 items (arr = ['No.0', 'No.1', 'No.2']), and lazy loading is enabled.\nList() {\n  Repeat<string>(this.arr)\n    .each((obj: RepeatItem<string>) => { ListItem() { Text(obj.item) }})\n    .virtualScroll({\n      onTotalCount: () => { return 100; },\n      onLazyLoading: (index: number) => { this.arr[index] = `No.${index}`; }\n    })\n}"
+        },
+        {
+            "title": "TemplateOptions",
+            "description": "Atomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nWhen cachedCount is set to the maximum number of nodes in the display area of the container component for the current template, Repeat achieves maximum reuse efficiency. If there are no nodes of the current template in the container component's display area, the cache list is not released, which increases application memory usage. You are advised to set cachedCount to the number of nodes within the container component's display area and adjust the value according to the actual situation. Yet, setting cachedCount to less than 2 is not recommended, as this may lead to the frequent node creation during rapid scrolling and result in performance degradation.\nThe .cachedCount() attribute of the scrollable container component and the cachedCount parameter of the .template() method of Repeat are used to balance performance and memory, but their meanings are different.\nExample",
+            "code": "// arr is an array of the Array<string> type. Use Repeat in a List container component with virtual scrolling enabled.\n// Define a reusable template temp for generating Text components. Use the temp template for all data items.\n// Set the maximum cache count for the temp template to 2.\nList() {\n  Repeat<string>(this.arr)\n    .each((obj: RepeatItem<string>) => {})\n    .virtualScroll()\n    .template('temp', (obj: RepeatItem<string>) => { ListItem() { Text(obj.item) }}, { cachedCount: 2 })\n    .templateId((item: string, index: number) => { return 'temp' })\n}"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "title": "wrapBuilder",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-wrapbuilder",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "wrapBuilder",
+            "description": "wrapBuilder<Args extends Object[]>(builder: (...args: Args) => void): WrappedBuilder<Args>\nA template function that returns a WrappedBuilder object. The template parameter Args extends Object[] represents the parameter list of the builder function to be encapsulated.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nReturn value\nExample",
+            "code": "@Builder\nfunction MyBuilder(value: string, size: number) {\n  Text(value)\n    .fontSize(size)\n}\nlet builderVar: WrappedBuilder<[string, number]> = wrapBuilder(MyBuilder);"
+        },
+        {
+            "title": "constructor",
+            "description": "constructor(builder: (...args: Args) => void)\nA constructor used to create a WrappedBuilder instance.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nExample",
+            "code": "@Builder\nfunction MyBuilder(value: string, size: number) {\n  Text(value)\n    .fontSize(size)\n}\nlet builderVar: WrappedBuilder<[string, number]> = new WrappedBuilder<[string, number]>(MyBuilder);"
+        }
+    ]
+}

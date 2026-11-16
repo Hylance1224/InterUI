@@ -1,0 +1,5 @@
+Infer the immediate predecessor of each interaction screenshot by inspecting
+all attached images. The images are attached in this exact order:
+{{image_mapping}}
+
+Produce the complete source/target records for transitions.txt.

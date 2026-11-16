@@ -1,0 +1,12 @@
+{
+    "title": "Show/Hide Event",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-events-show-hide",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to control the mounting and unmounting of a component using a button, triggering onAttach and onDetach events.",
+            "code": "// xxx.ets\nimport { promptAction } from '@kit.ArkUI';\n@Entry\n@Component\nstruct AppearExample {\n  @State isShow: boolean = true;\n  @State changeAppear: string = 'Show/Hide';\n  private myText: string = 'Text for onAppear';\n  build() {\n    Column() {\n      Button(this.changeAppear)\n        .onClick(() => {\n          this.isShow = !this.isShow\n        }).margin(15)\n      if (this.isShow) {\n        Text(this.myText).fontSize(26).fontWeight(FontWeight.Bold)\n          .onAttach(() => {\n            this.getUIContext().getPromptAction().showToast({\n              message: 'Text shown.',\n              duration: 2000,\n              bottom: 500\n            })\n          })\n          .onDetach(() => {\n            this.getUIContext().getPromptAction().showToast({\n              message: 'Text hidden.',\n              duration: 2000,\n              bottom: 500\n            })\n          })\n      }\n    }.padding(30).width('100%')\n  }\n}"
+        }
+    ]
+}

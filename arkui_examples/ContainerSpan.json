@@ -1,0 +1,17 @@
+{
+    "title": "ContainerSpan",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-components-containerspan",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Setting the Background Style",
+            "description": "This example demonstrates how to set the background style for text using the textBackgroundStyle attribute, available since API version 11.",
+            "code": "// xxx.ets\n@Component\n@Entry\nstruct Index {\n  build() {\n    Column() {\n      Text() {\n        ContainerSpan() {\n          // Replace $r('app.media.app_icon') with the image resource file you use.\n          ImageSpan($r('app.media.app_icon'))\n            .width('40vp')\n            .height('40vp')\n            .verticalAlign(ImageSpanAlignment.CENTER)\n          Span('   Hello World !   ').fontSize('16fp').fontColor(Color.White)\n        }\n        .textBackgroundStyle({\n          color: \"#7F007DFF\",\n          radius: {\n            topLeft: 12,\n            topRight: 12,\n            bottomLeft: 12,\n            bottomRight: 12\n          }\n        })\n      }\n    }.width('100%').alignItems(HorizontalAlign.Center)\n  }\n}"
+        },
+        {
+            "title": "Example 2: Setting the Background Style Using attributeModifier",
+            "description": "This example demonstrates how to set the background style for text using the attributeModifier attribute, available since API version 12.",
+            "code": "import { ContainerSpanModifier } from '@kit.ArkUI';\nclass MyContainerSpanModifier extends ContainerSpanModifier {\n  applyNormalAttribute(instance: ContainerSpanAttribute): void {\n    super.applyNormalAttribute?.(instance);\n    this.textBackgroundStyle({ color: \"#7F007DFF\", radius: \"12vp\" });\n  }\n}\n@Entry\n@Component\nstruct ContainerSpanModifierExample {\n  @State containerSpanModifier: ContainerSpanModifier = new MyContainerSpanModifier();\n  build() {\n    Column() {\n      Text() {\n        ContainerSpan() {\n          // Replace $r('app.media.startIcon') with the image resource file you use.\n          ImageSpan($r('app.media.startIcon'))\n            .width('40vp')\n            .height('40vp')\n            .verticalAlign(ImageSpanAlignment.CENTER)\n          Span(' I\\'m ContainerSpan attributeModifier ').fontSize('16fp').fontColor(Color.White)\n        }.attributeModifier(this.containerSpanModifier as MyContainerSpanModifier)\n      }\n    }.width('100%').alignItems(HorizontalAlign.Center)\n  }\n}"
+        }
+    ]
+}

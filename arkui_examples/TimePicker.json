@@ -1,0 +1,52 @@
+{
+    "title": "TimePicker",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-components-timepicker",
+    "example_count": 9,
+    "examples": [
+        {
+            "title": "enableHapticFeedback12+",
+            "description": "enableHapticFeedback(enable: boolean)\nSets whether to enable haptic feedback.\nTo enable haptic feedback, you must declare the following permission under requestPermissions in module in src/main/module.json5 of the project.",
+            "code": "\"requestPermissions\": [\n   {\n      \"name\": \"ohos.permission.VIBRATE\",\n   }\n]"
+        },
+        {
+            "title": "enableHapticFeedback18+",
+            "description": "enableHapticFeedback(enable: Optional<boolean>)\nSets whether to enable haptic feedback. Compared with enableHapticFeedback12+, this API supports the undefined type for the enable parameter.\nTo enable haptic feedback, you must declare the following permission under requestPermissions in module in src/main/module.json5 of the project.",
+            "code": "\"requestPermissions\": [\n  {\n    \"name\": \"ohos.permission.VIBRATE\",\n  }\n]"
+        },
+        {
+            "title": "Example 1: Setting the Text Style",
+            "description": "This example demonstrates how to customize the text style in a time picker using disappearTextStyle, textStyle, and selectedTextStyle.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TimePickerExample {\n  private selectedTime: Date = new Date('2022-07-22T08:00:00');\n  build() {\n    TimePicker({\n      selected: this.selectedTime\n    })\n      .disappearTextStyle({ color: '#004aaf', font: { size: 24, weight: FontWeight.Lighter } })\n      .textStyle({ color: Color.Black, font: { size: 26, weight: FontWeight.Normal } })\n      .selectedTextStyle({ color: Color.Blue, font: { size: 30, weight: FontWeight.Bolder } })\n      .onChange((value: TimePickerResult) => {\n        if (value.hour >= 0) {\n          this.selectedTime.setHours(value.hour, value.minute);\n          console.info('select current date is: ' + JSON.stringify(value));\n        }\n      })\n  }\n}"
+        },
+        {
+            "title": "Example 2: Switching Between 12-Hour and 24-Hour Formats",
+            "description": "This example demonstrates how to switch between 12-hour and 24-hour formats using useMilitaryTime.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TimePickerExample {\n  @State isMilitaryTime: boolean = false;\n  private selectedTime: Date = new Date('2022-07-22T08:00:00');\n  build() {\n    Column() {\n      Button('Switch Time Format')\n        .margin(30)\n        .onClick(() => {\n          this.isMilitaryTime = !this.isMilitaryTime;\n        })\n      TimePicker({\n        selected: this.selectedTime\n      })\n        .useMilitaryTime(this.isMilitaryTime)\n        .onChange((value: TimePickerResult) => {\n          if (value.hour >= 0) {\n            this.selectedTime.setHours(value.hour, value.minute);\n            console.info('select current time is: ' + JSON.stringify(value));\n          }\n        })\n        .onEnterSelectedArea((value: TimePickerResult) => {\n            console.info('item enter selected area, time is: ' + JSON.stringify(value));\n        })\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 3: Setting the Time Format",
+            "description": "This example shows how to set the time format using format and dateTimeOptions.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TimePickerExample {\n  private selectedTime: Date = new Date('2022-07-22T08:00:00');\n  build() {\n    Column() {\n      TimePicker({\n        selected: this.selectedTime,\n        format: TimePickerFormat.HOUR_MINUTE_SECOND\n      })\n        .dateTimeOptions({ hour: \"numeric\", minute: \"2-digit\", second: \"2-digit\" })\n        .onChange((value: TimePickerResult) => {\n          if (value.hour >= 0) {\n            this.selectedTime.setHours(value.hour, value.minute);\n            console.info('select current date is: ' + JSON.stringify(value));\n          }\n        })\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 4: Setting Loop Scrolling",
+            "description": "This example demonstrates how to set whether to enable loop scrolling using loop.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TimePickerExample {\n  @State isLoop: boolean = true;\n  @State selectedTime: Date = new Date('2022-07-22T12:00:00');\n  build() {\n    Column() {\n      TimePicker({\n        selected: this.selectedTime\n      })\n        .loop(this.isLoop)\n        .onChange((value: TimePickerResult) => {\n          if (value.hour >= 0) {\n            this.selectedTime.setHours(value.hour, value.minute);\n            console.info('select current date is: ' + JSON.stringify(value));\n          }\n        })\n      Row() {\n        Text('Loop scroll').fontSize(20)\n        Toggle({ type: ToggleType.Switch, isOn: true })\n          .onChange((isOn: boolean) => {\n            this.isLoop = isOn;\n          })\n      }.position({ x: '60%', y: '40%' })\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 5: Setting the Start Time",
+            "description": "This example demonstrates how to set the start time for the time picker.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TimePickerExample {\n  private selectedTime: Date = new Date('2022-07-22T08:50:00');\n  build() {\n    Column() {\n      TimePicker({\n        selected: this.selectedTime,\n        format: TimePickerFormat.HOUR_MINUTE_SECOND,\n        start: new Date('2022-07-22T08:30:00')\n      })\n        .dateTimeOptions({ hour: \"numeric\", minute: \"2-digit\", second: \"2-digit\" })\n        .onChange((value: TimePickerResult) => {\n          if (value.hour >= 0) {\n            this.selectedTime.setHours(value.hour, value.minute);\n            console.info('select current date is: ' + JSON.stringify(value));\n          }\n        })\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 6: Setting the End Time",
+            "description": "This example demonstrates how to set the end time for the time picker.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TimePickerExample {\n  private selectedTime: Date = new Date('2022-07-22T08:50:00');\n  build() {\n    Column() {\n      TimePicker({\n        selected: this.selectedTime,\n        format: TimePickerFormat.HOUR_MINUTE_SECOND,\n        end: new Date('2022-07-22T15:20:00'),\n      })\n        .dateTimeOptions({ hour: \"numeric\", minute: \"2-digit\", second: \"2-digit\" })\n        .onChange((value: TimePickerResult) => {\n          if (value.hour >= 0) {\n            this.selectedTime.setHours(value.hour, value.minute);\n            console.info('select current date is: ' + JSON.stringify(value));\n          }\n        })\n    }.width('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 7: Enabling the AM/PM Indicator to Automatically Switch Based on the Hour Value in 12-hour Format",
+            "description": "This example demonstrates how to enable the AM/PM indicator to automatically switch based on the hour value in 12-hour format using enableCascade and loop.\nThe enableCascade API is added since API version 18.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct TimePickerExample {\n  private selectedTime: Date = new Date('2022-07-22T08:00:00');\n  build() {\n    Column() {\n      TimePicker({\n        selected: this.selectedTime,\n      })\n        .enableCascade(true)\n        .loop(true)\n        .onChange((value: TimePickerResult) => {\n          if (value.hour >= 0) {\n            this.selectedTime.setHours(value.hour, value.minute);\n            console.info('select current date is: ' + JSON.stringify(value));\n          }\n        })\n    }.width('100%')\n  }\n}"
+        }
+    ]
+}

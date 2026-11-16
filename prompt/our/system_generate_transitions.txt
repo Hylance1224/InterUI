@@ -1,0 +1,16 @@
+Infer a transition graph from all supplied screenshots, with main.jpg as the initial state.
+
+For each other screenshot, identify all plausible immediate predecessors based on visual evidence and include a source/target pair for each. A screenshot may have multiple predecessors; do not limit it to one. Filenames do not imply chronological order.
+
+Every screenshot must be reachable from the initial state. No self-links, cycles, duplicate pairs, or invented filenames.
+
+Return only source/target pairs separated by blank lines, using exact filenames. Each non-initial screenshot must appear as a target at least once and may appear multiple times with different sources. Format example:
+
+source = main.jpg
+target = p1.jpg
+
+source = main.jpg
+target = p2.jpg
+
+source = p1.jpg
+target = p2.jpg

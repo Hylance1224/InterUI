@@ -1,0 +1,12 @@
+{
+    "title": "Cursor Control",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-cursor",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to change the mouse cursor style using setCursor.",
+            "code": "// xxx.ets\nimport { pointer } from '@kit.InputKit';\n@Entry\n@Component\nstruct CursorControlExample {\n  @State text: string = '';\n  controller: TextInputController = new TextInputController()\n  build() {\n    Column() {\n      Row()\n        .height(200)\n        .width(200)\n        .backgroundColor(Color.Green)\n        .position({ x: 60, y: 70 })\n        .onHover((flag) => {\n          if (flag) {\n            // You are advised to use this.getUIContext().getCursorController().setCursor().\n            cursorControl.setCursor(pointer.PointerStyle.EAST)\n          } else {\n            // You are advised to use this.getUIContext().getCursorController().restoreDefault().\n            cursorControl.restoreDefault()\n          }\n        })\n      Row()\n        .height(200)\n        .width(200)\n        .backgroundColor(Color.Blue)\n        .position({ x: 130, y: 120 })\n        .onHover((flag) => {\n          if (flag) {\n            // You are advised to use this.getUIContext().getCursorController().setCursor().\n            cursorControl.setCursor(pointer.PointerStyle.WEST)\n          } else {\n            // You are advised to use this.getUIContext().getCursorController().restoreDefault().\n            cursorControl.restoreDefault()\n          }\n        })\n    }.width('100%')\n  }\n}"
+        }
+    ]
+}

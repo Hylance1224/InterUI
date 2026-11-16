@@ -1,0 +1,12 @@
+{
+    "title": "Distributed Migration Identifier",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-restoreid",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to use restoreId to set the ID of the List component for device matching during hopping.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct RestoreIdExample {\n  private arr: number[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n  build() {\n    Column() {\n      List({ space: 20 }) {\n        ForEach(this.arr, (item:number) => {\n          ListItem() {\n            Text('' + item)\n              .width('100%')\n              .height(100)\n              .fontSize(16)\n              .textAlign(TextAlign.Center)\n              .borderRadius(10)\n              .backgroundColor(Color.Pink)\n          }\n        }, (item:number) => (item.toString()))\n      }\n      .restoreId(1)\n    }\n  }\n}"
+        }
+    ]
+}

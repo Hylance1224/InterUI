@@ -1,0 +1,12 @@
+{
+    "title": "Immediate Delivery of Explicit Animation (animateToImmediately)",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-explicit-animatetoimmediately",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to use the animateToImmediately API to deliver an explicit animation immediately.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct AnimateToImmediatelyExample {\n  @State widthSize: number = 250;\n  @State heightSize: number = 100;\n  @State opacitySize: number = 0;\n  private flag: boolean = true;\n  build() {\n    Column() {\n      Column()\n      .width(this.widthSize)\n      .height(this.heightSize)\n      .backgroundColor(Color.Green)\n      .opacity(this.opacitySize)\n      Button('change size')\n        .margin(30)\n        .onClick(() => {\n          if (this.flag) {\n            animateToImmediately({\n              delay: 0,\n              duration: 1000\n            }, () => {\n              this.opacitySize = 1;\n            })\n            this.getUIContext()?.animateTo({\n              delay: 1000,\n              duration: 1000\n            }, () => {\n              this.widthSize = 150;\n              this.heightSize = 60;\n            })\n          } else {\n            animateToImmediately({\n              delay: 0,\n              duration: 1000\n            }, () => {\n              this.widthSize = 250;\n              this.heightSize = 100;\n            })\n            this.getUIContext()?.animateTo({\n              delay: 1000,\n              duration: 1000\n            }, () => {\n              this.opacitySize = 0;\n            })\n          }\n          this.flag = !this.flag;\n        })\n    }.width('100%').margin({ top: 5 })\n  }\n}"
+        }
+    ]
+}

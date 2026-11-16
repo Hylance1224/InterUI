@@ -1,0 +1,12 @@
+{
+    "title": "Custom Event Interception",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-on-touch-intercept",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to modify the HitTestMode attribute of a component using onTouchIntercept.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct Index {\n  isPolygon(event: TouchEvent) {\n    return true;\n  }\n  build() {\n    Row() {\n      Column() {\n        Text(\"hello world\")\n          .backgroundColor(Color.Blue)\n          .fontSize(50)\n          .fontWeight(FontWeight.Bold)\n          .onClick(() => {\n            console.info(\"Text click\");\n          })\n      }\n      .width(400)\n      .height(300)\n      .backgroundColor(Color.Pink)\n      .onClick(() => {\n        console.info(\"Column click\");\n      })\n      // Call onTouchIntercept to modify the HitTestMode attribute of the component.\n      .onTouchIntercept((event: TouchEvent) => {\n        console.info(\"OnTouchIntercept + \" + JSON.stringify(event));\n        // Check whether touches is empty before using it.\n        if (event && event.touches) {\n          let touches = event.touches;\n          for (let i = 0; touches[i] != null; i++) {\n            console.info('onTouchIntercept touches:', JSON.stringify(touches[i]));\n          }\n        }\n        if (this.isPolygon(event)) {\n          return HitTestMode.None;\n        }\n        return HitTestMode.Default;\n      })\n    }\n    .width('100%')\n  }\n}"
+        }
+    ]
+}

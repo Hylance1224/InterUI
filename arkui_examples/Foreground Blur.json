@@ -1,0 +1,12 @@
+{
+    "title": "Foreground Blur",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-foreground-blur-style",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to apply content blur to an image using foregroundBlurStyle.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct ForegroundBlurStyleDemo {\n  build() {\n    Column() {\n      Text('Thin Material').fontSize(30).fontColor(0xCCCCCC)\n      // Replace $r(\"app.media.bg\") with the image resource file you use.\n      Image($r('app.media.bg'))\n        .width(300)\n        .height(350)\n        .foregroundBlurStyle(BlurStyle.Thin,\n          { colorMode: ThemeColorMode.LIGHT, adaptiveColor: AdaptiveColor.DEFAULT, scale: 1.0 })\n    }\n    .height('100%')\n    .width('100%')\n  }\n}"
+        }
+    ]
+}

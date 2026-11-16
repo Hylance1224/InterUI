@@ -1,0 +1,12 @@
+{
+    "title": "RotationGesture",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-gestures-rotationgesture",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates the recognition of a two-finger rotation gesture using RotationGesture.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct RotationGestureExample {\n  @State angle: number = 0;\n  @State rotateValue: number = 0;\n  build() {\n    Column() {\n      Column() {\n        Text('RotationGesture angle:' + this.angle)\n      }\n      .height(200)\n      .width(300)\n      .padding(20)\n      .border({ width: 3 })\n      .margin(80)\n      .rotate({ angle: this.angle })\n      // The gesture event is triggered by rotating with two fingers.\n      .gesture(\n      RotationGesture()\n        .onActionStart((event: GestureEvent) => {\n          console.info('Rotation start')\n        })\n        .onActionUpdate((event: GestureEvent) => {\n          if (event) {\n            this.angle = this.rotateValue + event.angle\n          }\n        })\n        .onActionEnd((event: GestureEvent) => {\n          this.rotateValue = this.angle\n          console.info('Rotation end')\n        })\n      )\n    }.width('100%')\n  }\n}"
+        }
+    ]
+}

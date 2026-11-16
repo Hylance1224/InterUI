@@ -1,0 +1,7 @@
+The first image is the UI before interaction, and the second image is the UI after interaction.
+
+Existing Layout Tree:
+
+{{layout_tree}}
+
+Compare the two images and update the Layout Tree.

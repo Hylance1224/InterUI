@@ -1,0 +1,12 @@
+{
+    "title": "GestureGroup",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-combined-gestures",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates the sequential recognition of combined gestures, specifically long press and pan gestures, using GestureGroup.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct GestureGroupExample {\n  @State count: number = 0;\n  @State offsetX: number = 0;\n  @State offsetY: number = 0;\n  @State positionX: number = 0;\n  @State positionY: number = 0;\n  @State borderStyles: BorderStyle = BorderStyle.Solid;\n  build() {\n    Column() {\n      Text('sequence gesture\\n' + 'LongPress onAction:' + this.count + '\\nPanGesture offset:\\nX: ' + this.offsetX + '\\n' + 'Y: ' + this.offsetY)\n        .fontSize(15)\n    }\n    .translate({ x: this.offsetX, y: this.offsetY, z: 0 })\n    .height(150)\n    .width(200)\n    .padding(20)\n    .margin(20)\n    .border({ width: 3, style: this.borderStyles })\n    .gesture(\n      // The following combined gestures are recognized in sequential recognition mode. If the long press gesture event is not triggered correctly, the pan gesture event will not be triggered.\n      GestureGroup(GestureMode.Sequence,\n        LongPressGesture({ repeat: true })\n          .onAction((event?: GestureEvent) => {\n            if (event && event.repeat) {\n              this.count++\n            }\n            console.info('LongPress onAction')\n          }),\n        PanGesture()\n          .onActionStart(() => {\n            this.borderStyles = BorderStyle.Dashed\n            console.info('pan start')\n          })\n          .onActionUpdate((event?: GestureEvent) => {\n            if (event) {\n              this.offsetX = this.positionX + event.offsetX\n              this.offsetY = this.positionY + event.offsetY\n            }\n            console.info('pan update')\n          })\n          .onActionEnd(() => {\n            this.positionX = this.offsetX\n            this.positionY = this.offsetY\n            this.borderStyles = BorderStyle.Solid\n            console.info('pan end')\n          })\n      )\n        .onCancel(() => {\n          console.info('sequence gesture canceled')\n        })\n    )\n  }\n}"
+        }
+    ]
+}

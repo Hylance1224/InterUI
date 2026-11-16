@@ -1,0 +1,12 @@
+{
+    "title": "LazyVGridLayout",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-lazyvgridlayout",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to implement a lazy-loading grid layout using the WaterFlow and LazyVGridLayout components.\nMyDataSource implements the IDataSource API for LazyForEach, which provides child components for LazyVGridLayout through LazyForEach.",
+            "code": "import { LengthMetrics } from '@kit.ArkUI'\nimport { MyDataSource } from './MyDataSource'\n@Entry\n@Component\nstruct LazyVGridLayoutSample1 {\n  private arr1:MyDataSource<number> = new MyDataSource<number>();\n  private arr2:MyDataSource<number> = new MyDataSource<number>();\n  build() {\n    Column() {\n      WaterFlow() {\n        LazyVGridLayout() {\n          LazyForEach(this.arr1, (item:number)=>{\n            Text('item' + item.toString())\n              .height(64)\n              .width('100%')\n              .borderRadius(5)\n              .backgroundColor(Color.White)\n              .textAlign(TextAlign.Center)\n          })\n        }\n        .columnsTemplate('1fr')\n        .rowsGap(LengthMetrics.vp(10))\n        LazyVGridLayout() {\n          LazyForEach(this.arr2, (item:number)=>{\n            Text('item' + item.toString())\n              .height(128)\n              .width('100%')\n              .borderRadius(5)\n              .backgroundColor(Color.White)\n              .textAlign(TextAlign.Center)\n          })\n        }\n        .columnsTemplate('1fr 1fr')\n        .rowsGap(LengthMetrics.vp(10))\n        .columnsGap(LengthMetrics.vp(10))\n      }.padding(10)\n      .rowsGap(10)\n    }\n    .width('100%').height('100%')\n    .backgroundColor('#DCDCDC')\n  }\n  aboutToAppear(): void {\n    for (let i = 0; i < 6; i++) {\n      this.arr1.pushData(i);\n    }\n    for (let i = 0; i < 100; i++) {\n      this.arr2.pushData(i);\n    }\n  }\n}"
+        }
+    ]
+}

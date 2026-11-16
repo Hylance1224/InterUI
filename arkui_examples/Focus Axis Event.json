@@ -1,0 +1,12 @@
+{
+    "title": "Focus Axis Event",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-events-focus_axis",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to set up a focus axis event on a button. When the button gains focus, operating the game controller's directional pad or joystick will trigger the onFocusAxisEvent callback.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct FocusAxisEventExample {\n  @State text: string = ''\n  @State axisValue: string = ''\n  aboutToAppear(): void {\n    this.getUIContext().getFocusController().activate(true)\n  }\n  aboutToDisappear(): void {\n    this.getUIContext().getFocusController().activate(false)\n  }\n  build() {\n    Column() {\n      Button('FocusAxisEvent')\n        .defaultFocus(true)\n        .onFocusAxisEvent((event: FocusAxisEvent) => {\n          let absX = event.axisMap.get(AxisModel.ABS_X);\n          let absY = event.axisMap.get(AxisModel.ABS_Y);\n          let absZ = event.axisMap.get(AxisModel.ABS_Z);\n          let absRz = event.axisMap.get(AxisModel.ABS_RZ);\n          let absGas = event.axisMap.get(AxisModel.ABS_GAS);\n          let absBrake = event.axisMap.get(AxisModel.ABS_BRAKE);\n          let absHat0X = event.axisMap.get(AxisModel.ABS_HAT0X);\n          let absHat0Y = event.axisMap.get(AxisModel.ABS_HAT0Y);\n          this.axisValue =\n            'absX: ' + absX + '; absY: ' + absY + '; absZ: ' + absZ + '; absRz: ' + absRz + '; absGas: ' + absGas +\n              '; absBrake: ' + absBrake + '; absHat0X: ' + absHat0X + '; absHat0Y: ' + absHat0Y;\n          this.text = JSON.stringify(event);\n        })\n      Text(this.axisValue).padding(15)\n      Text(this.text).padding(15)\n    }.height(300).width('100%').padding(35)\n  }\n}"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "title": "Text Component Common APIs",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-text-common",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Objects to Import",
+            "description": "The Text component is used as an example. For details, see Example 10: Obtaining Text Information.",
+            "code": "controller: TextController = new TextController();\nlet layoutManager: LayoutManager = this.controller.getLayoutManager();"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "title": "Row",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-container-row",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Setting the Layout Attributes of the Row Component",
+            "description": "This example demonstrates the effect of setting the layout attributes (such as the spacing and alignment mode) of the Row component.",
+            "code": "// resources/base/element/string.json\n{\n  \"string\": [\n    {\n      \"name\": \"stringSpace\",\n      \"value\": \"5\"\n    }\n  ]\n}"
+        },
+        {
+            "title": "Example 2: Configuring the Reverse Attribute",
+            "description": "This example demonstrates the effect of setting the reverse attribute of the Row component.",
+            "code": "@Entry\n@Component\nstruct RowReverseSample {\n  build() {\n    Row() {\n      Text(\"1\")\n        .width(100)\n        .height(50)\n        .backgroundColor(0xAFEEEE)\n      Text(\"2\")\n        .width(100)\n        .height(50)\n        .backgroundColor(0x00FFFF)\n    }\n    .height(100)\n    .width(300)\n    .border({ width: 1 })\n    .reverse(true)\n  }\n}"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "title": "NodeContainer",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-components-nodecontainer",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to mount a BuilderNode through NodeController.",
+            "code": "import { NodeController, BuilderNode, FrameNode, UIContext } from '@kit.ArkUI';\ndeclare class Params {\n  text: string\n}\n@Builder\nfunction buttonBuilder(params: Params) {\n  Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.SpaceEvenly }) {\n    Text(params.text)\n      .fontSize(12)\n    Button(`This is a Button`, { type: ButtonType.Normal, stateEffect: true })\n      .fontSize(12)\n      .borderRadius(8)\n      .backgroundColor(0x317aff)\n  }\n  .height(100)\n  .width(200)\n}\nclass MyNodeController extends NodeController {\n  private rootNode: BuilderNode<[Params]> | null = null;\n  private wrapBuilder: WrappedBuilder<[Params]> = wrapBuilder(buttonBuilder);\n  makeNode(uiContext: UIContext): FrameNode | null {\n    if (this.rootNode === null) {\n      this.rootNode = new BuilderNode(uiContext);\n      this.rootNode.build(this.wrapBuilder, { text: \"This is a Text\" })\n    }\n    return this.rootNode.getFrameNode();\n  }\n}\n@Entry\n@Component\nstruct Index {\n  private baseNode: MyNodeController = new MyNodeController()\n  build() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Start, justifyContent: FlexAlign.SpaceEvenly }) {\n      Text(\"This is a NodeContainer contains a text and a button \")\n        .fontSize(9)\n        .fontColor(0xCCCCCC)\n      NodeContainer(this.baseNode)\n        .borderWidth(1)\n        .onClick(() => {\n          console.info(\"click event\");\n        })\n    }\n    .padding({ left: 35, right: 35, top: 35 })\n    .height(200)\n    .width(300)\n  }\n}"
+        }
+    ]
+}

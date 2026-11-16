@@ -1,0 +1,12 @@
+{
+    "title": "SplitLayout",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ohos-arkui-advanced-splitlayout",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Examples",
+            "description": "This example demonstrates how to use SplitLayout to achieve a page layout that is both adaptable and responsive.",
+            "code": "import { SplitLayout } from '@kit.ArkUI';\n@Entry\n@Component\nstruct Index {\n  @State demoImage: Resource = $r(\"app.media.background\");\n  build() {\n    Column() {\n      SplitLayout({\n        mainImage: this.demoImage,\n        primaryText: 'Discover fresh hits',\n        secondaryText: 'Your go-to destination for curated, top-notch new releases',\n        tertiaryText: 'Stay tuned for daily updates',\n      }) {\n        Text('Example: Components can be added to the blank area container.')\n          .margin({ top: 36 })\n      }\n    }\n    .justifyContent(FlexAlign.SpaceBetween)\n    .height('100%')\n    .width('100%')\n  }\n}"
+        }
+    ]
+}

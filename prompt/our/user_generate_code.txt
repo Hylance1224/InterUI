@@ -1,0 +1,17 @@
+Analyze the provided UI screenshots, UI Layout Tree, and implementation questions with their answers, then generate complete ArkUI code compatible with API 21.
+
+Prioritize the UI screenshots as the primary source of truth. Reproduce the visual appearance, layout, component positions, sizes, spacing, and interaction states based primarily on the screenshots.
+
+Use the UI Layout Tree as auxiliary guidance for understanding the page structure and interaction behaviors.
+
+Use the implementation questions and answers as auxiliary guidance for implementing dynamic interactions.
+
+If the screenshots conflict with the UI Layout Tree or the implementation guidance, always follow the screenshots.
+
+Use $r('app.media.image') consistently for all local images and icon resources referenced in the code.
+
+UI Layout Tree:
+{{layout_tree}}
+
+Implementation Questions and Answers:
+{{questions_and_answers}}

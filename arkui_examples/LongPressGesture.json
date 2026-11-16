@@ -1,0 +1,12 @@
+{
+    "title": "LongPressGesture",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-gestures-longpressgesture",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates the recognition of a long press gesture using LongPressGesture. Since API version 22, the allowableMovement attribute in LongPressGestureHandlerOptions can be used to set the maximum movement distance of a gesture to be recognized.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct LongPressGestureExample {\n  @State count: number = 0;\n  build() {\n    Column() {\n      Text('LongPress onAction:' + this.count).fontSize(28)\n        // This gesture event is triggered when the text is long-pressed with a single finger.\n        .gesture(\n        // Set the maximum movement distance allowed for gesture recognition by the long press gesture recognizer to 200 px.\n        LongPressGesture({ repeat: true, allowableMovement: 200 })\n          // Since repeat is set to true, the event callback is continuously triggered during the long press, with the triggering interval specified by duration (500 ms by default).\n          .onAction((event: GestureEvent) => {\n            if (event && event.repeat) {\n              this.count++\n            }\n          })\n            // Triggered when the long press gesture ends.\n          .onActionEnd((event: GestureEvent) => {\n            this.count = 0\n          })\n        )\n    }\n    .height(200)\n    .width(300)\n    .padding(20)\n    .border({ width: 3 })\n    .margin(30)\n  }\n}"
+        }
+    ]
+}

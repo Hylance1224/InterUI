@@ -1,0 +1,22 @@
+{
+    "title": "ImageBitmap",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-components-canvas-imagebitmap",
+    "example_count": 3,
+    "examples": [
+        {
+            "title": "Example 1: Loading an Image",
+            "description": "This example demonstrates how to load a local image using the ImageBitmap object.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct ImageExample {\n  private settings: RenderingContextSettings = new RenderingContextSettings(true);\n  private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings);\n  // Replace \"common/images/example.jpg\" with the image resource file you use.\n  private img: ImageBitmap = new ImageBitmap(\"common/images/example.jpg\");\n  build() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {\n      Canvas(this.context)\n        .width('100%')\n        .height('100%')\n        .backgroundColor('#ffff00')\n        .onReady(() => {\n          this.context.drawImage(this.img, 0, 0, 500, 500, 0, 0, 400, 200)\n          this.img.close()\n        })\n    }\n    .width('100%')\n    .height('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 2: Creating an ImageBitmap Object",
+            "description": "This example shows how to create an ImageBitmap object using a PixelMap object.\nThe DevEco Studio Previewer does not support the getPixelMap API and cannot display content drawn by PixelMap.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct Demo {\n  private settings: RenderingContextSettings = new RenderingContextSettings(true);\n  private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings);\n  build() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {\n      Canvas(this.context)\n        .width('100%')\n        .height('50%')\n        .backgroundColor('#ffff00')\n        .onReady(() => {\n          this.context.fillStyle = \"#00ff00\"\n          this.context.fillRect(0, 0, 100, 100)\n          let pixel = this.context.getPixelMap(0, 0, 100, 100)\n          let image = new ImageBitmap(pixel)\n          this.context.drawImage(image, 100, 100)\n        })\n    }\n    .width('100%')\n    .height('100%')\n  }\n}"
+        },
+        {
+            "title": "Example 3: Supporting Concurrent Thread Drawing",
+            "description": "This example demonstrates how to implement concurrent thread drawing by creating a Worker thread.\nThe content drawn in the Worker thread cannot be previewed in DevEco Studio Previewer.",
+            "code": "import { worker } from '@kit.ArkTS';\n@Entry\n@Component\nstruct imageBitmapExamplePage {\n  private settings: RenderingContextSettings = new RenderingContextSettings(true);\n  private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings);\n  private myWorker = new worker.ThreadWorker('entry/ets/workers/Worker.ts');\n  // Replace \"common/images/example.jpg\" with the image resource file you use.\n  private img: ImageBitmap = new ImageBitmap(\"common/images/example.jpg\");\n  build() {\n    Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {\n      Canvas(this.context)\n        .width('100%')\n        .height('100%')\n        .backgroundColor('#ffff00')\n        .onReady(() => {\n          this.myWorker.postMessage({ myImage: this.img });\n          this.myWorker.onmessage = (e): void => {\n            if (e.data.myImage) {\n              let image: ImageBitmap = e.data.myImage\n              this.context.transferFromImageBitmap(image)\n            }\n          }\n        })\n    }\n    .width('100%')\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

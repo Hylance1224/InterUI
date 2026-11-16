@@ -1,0 +1,17 @@
+{
+    "title": "QRCode",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-basic-components-qrcode",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "Example 1: Setting the Color, Background Color, and Opacity",
+            "description": "This example demonstrates the basic usage of the QRCode component. It sets the QR code color using the color attribute, the background color using the backgroundColor attribute, and the opacity using the contentOpacity attribute.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct QRCodeExample {\n  private value: string = 'hello world';\n  build() {\n    Column({ space: 5 }) {\n      Text('normal').fontSize(9).width('90%').fontColor(0xCCCCCC).fontSize(30)\n      QRCode(this.value).width(140).height(140)\n      // Set the color of the QR code.\n      Text('color').fontSize(9).width('90%').fontColor(0xCCCCCC).fontSize(30)\n      QRCode(this.value).color(0xF7CE00).width(140).height(140)\n      // Set the background color of the QR code.\n      Text('backgroundColor').fontSize(9).width('90%').fontColor(0xCCCCCC).fontSize(30)\n      QRCode(this.value).width(140).height(140).backgroundColor(Color.Orange)\n      // Set the opacity of QR code content.\n      Text('contentOpacity').fontSize(9).width('90%').fontColor(0xCCCCCC).fontSize(30)\n      QRCode(this.value).width(140).height(140).color(Color.Black).contentOpacity(0.1)\n    }.width('100%').margin({ top: 5 })\n  }\n}"
+        },
+        {
+            "title": "Example 2: Setting the Background Color to Transparent",
+            "description": "This example shows how to set the QR code background color to transparent using the backgroundColor attribute, allowing the QR code content to blend with the background.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct QRCodeExample {\n  private value: string = 'hello world';\n  build() {\n    Column({ space: 5 }) {\n      RelativeContainer() {\n        // Replace $r('app.media.ocean') with the image resource file you use.\n        Image($r('app.media.ocean'))\n        // Set the QR code background color to transparent.\n        QRCode(this.value).width(200).height(200).backgroundColor('#00ffffff')\n      }.width(200).height(200)\n    }.width('100%').margin({ top: 5 })\n  }\n}"
+        }
+    ]
+}

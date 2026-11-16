@@ -1,0 +1,17 @@
+{
+    "title": "Page-Level Pixel Rounding",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-pixelroundforpage",
+    "example_count": 2,
+    "examples": [
+        {
+            "title": "setPixelRoundMode",
+            "description": "setPixelRoundMode(mode: PixelRoundMode): void\nSets the pixel rounding mode for this page.\nAtomic service API: This API can be used in atomic services since API version 18.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nPixel rounding mode.\nDefault value: PixelRoundMode.PIXEL_ROUND_ON_LAYOUT_FINISH.\nIf this parameter is set to an invalid value, the default value will be used.\nExample",
+            "code": "// EntryAbility.ets\nimport { UIContext } from '@kit.ArkUI';\nimport { hilog } from '@kit.PerformanceAnalysisKit';\nonWindowStageCreate(windowStage: window.WindowStage) {\n   windowStage.loadContent('pages/Index', (err, data) => {\n      let uiContext :UIContext = windowStage.getMainWindowSync().getUIContext();\n      uiContext.setPixelRoundMode(PixelRoundMode.PIXEL_ROUND_AFTER_MEASURE);\n      if (err.code) {\n        hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');\n        return;\n      }\n      hilog.info(0x0000, 'testTag', 'Succeeded in loading the content. Data: %{public}s', JSON.stringify(data) ?? '');\n    });\n  }"
+        },
+        {
+            "title": "getPixelRoundMode",
+            "description": "getPixelRoundMode(): PixelRoundMode\nObtains the pixel rounding mode for this page.\nAtomic service API: This API can be used in atomic services since API version 18.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "// EntryAbility.ets\nimport { UIContext } from '@kit.ArkUI';\nimport { hilog } from '@kit.PerformanceAnalysisKit';\nonWindowStageCreate(windowStage: window.WindowStage) {\n    windowStage.loadContent('pages/Index', (err, data) => {\n      let uiContext: UIContext = windowStage.getMainWindowSync().getUIContext();\n      console.info(\"pixelRoundMode : \" + uiContext.getPixelRoundMode().valueOf());\n      if (err.code) {\n        hilog.error(0x0000, 'testTag', 'Failed to load the content. Cause: %{public}s', JSON.stringify(err) ?? '');\n        return;\n      }\n      hilog.info(0x0000, 'testTag', 'Succeeded in loading the content. Data: %{public}s', JSON.stringify(data) ?? '');\n    });\n  }"
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+{
+    "title": "Custom Property",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-universal-attributes-custom-property",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example shows how to set custom properties on the Column component and obtain the set custom properties from its corresponding FrameNode.",
+            "code": "// xxx.ets\nimport { FrameNode, UIContext } from '@kit.ArkUI';\n@Entry\n@Component\nstruct CustomPropertyExample {\n  build() {\n    Column() {\n      Text('text')\n      Button('print').onClick(() => {\n        // Obtain the frameNode corresponding to the Column and query the set custom properties.\n        const uiContext: UIContext = this.getUIContext();\n        if (uiContext) {\n          const node: FrameNode | null = uiContext.getFrameNodeById(\"Test_Column\") || null;\n          if (node) {\n            for (let i = 1; i < 4; i++) {\n              const key = 'customProperty' + i;\n              const property = node.getCustomProperty(key);\n              console.info(key, JSON.stringify(property));\n            }\n          }\n        }\n      })\n    }\n    .id('Test_Column')\n    // Set custom properties for the Column component.\n    .customProperty('customProperty1', {\n      'number': 10,\n      'string': 'this is a string',\n      'bool': true,\n      'object': {\n        'name': 'name',\n        'value': 100\n      }\n    })\n    .customProperty('customProperty2', {})\n    .customProperty('customProperty3', undefined)\n    .width('100%')\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

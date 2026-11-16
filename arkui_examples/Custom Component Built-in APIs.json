@@ -1,0 +1,42 @@
+{
+    "title": "Custom Component Built-in APIs",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-custom-component-api",
+    "example_count": 7,
+    "examples": [
+        {
+            "title": "UIContext",
+            "description": "type UIContext = UIContext\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nExample",
+            "code": "import { UIContext } from '@kit.ArkUI';\n@Entry\n@Component\nstruct MyComponent {\n  aboutToAppear() {\n    let uiContext: UIContext = this.getUIContext();\n  }\n  build() {\n    // ...\n  }\n}"
+        },
+        {
+            "title": "getUniqueId12+",
+            "description": "getUniqueId(): number\nObtains the unique ID of this component. This unique ID is assigned by the system to each component. If this API is called before the component's corresponding node is created or after it has been destroyed, an invalid unique ID, which is -1, will be returned.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "@Entry\n@Component\nstruct MyComponent {\n  aboutToAppear() {\n    let uniqueId: number = this.getUniqueId();\n  }\n  build() {\n    // ...\n  }\n}"
+        },
+        {
+            "title": "queryNavDestinationInfo",
+            "description": "queryNavDestinationInfo(): NavDestinationInfo | undefined;\nQueries the NavDestination to which a custom component belongs. This API takes effect only when the custom component is inside NavDestination.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "import { uiObserver } from '@kit.ArkUI';\n@Component\nexport struct NavDestinationExample {\n  build() {\n    NavDestination() {\n      MyComponent()\n    }\n  }\n}\n@Component\nstruct MyComponent {\n  navDesInfo: uiObserver.NavDestinationInfo | undefined\n  aboutToAppear() {\n    // this refers to the custom node MyComponent and searches for the nearest parent node of the NavDestination type from this node upwards.\n    this.navDesInfo = this.queryNavDestinationInfo();\n    console.info('get navDestinationInfo: ' + JSON.stringify(this.navDesInfo));\n  }\n  build() {\n    // ...\n  }\n}"
+        },
+        {
+            "title": "queryNavDestinationInfo18+",
+            "description": "queryNavDestinationInfo(isInner: Optional<boolean>): NavDestinationInfo | undefined\nQueries the information of the nearest NavDestination component (a navigation page or subpage of the Navigation component) associated with this custom component. The search direction is controlled by isInner: true for inward search and false for outward search.\nAtomic service API: This API can be used in atomic services since API version 18.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nParameters\nWhether to search inward for the nearest NavDestination component in the navigation stack.\ntrue: Search inward.\nfalse: Search outward.\nReturn value\nExample",
+            "code": "// Index.ets\n@Entry\n@Component\nstruct NavigationExample {\n  pageInfo: NavPathStack = new NavPathStack();\n  build() {\n    Navigation(this.pageInfo) {\n      Column() {\n        Button('pageOne', { stateEffect: true, type: ButtonType.Capsule })\n          .width('80%')\n          .height(40)\n          .margin(20)\n          .onClick(() => {\n            this.pageInfo.pushPath({ name: 'pageOne' }); // Push the NavDestination page specified by name to the navigation path stack.\n          })\n      }\n    }.title('NavIndex')\n  }\n}"
+        },
+        {
+            "title": "queryNavigationInfo12+",
+            "description": "queryNavigationInfo(): NavigationInfo | undefined\nQueries the Navigation to which a custom component belongs.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "// index.ets\nimport { uiObserver } from '@kit.ArkUI';\n@Entry\n@Component\nstruct MainPage {\n  pathStack: NavPathStack = new NavPathStack();\n  build() {\n    Navigation(this.pathStack) {\n      // ...\n    }.id(\"NavigationId\")\n  }\n}\n@Component\nexport struct PageOne {\n  pathStack: NavPathStack = new NavPathStack();\n  aboutToAppear() {\n    // this refers to the custom node PageOne and searches for the nearest parent node of the Navigation type from this node upwards.\n    let navigationInfo: uiObserver.NavigationInfo | undefined = this.queryNavigationInfo();\n    console.info('get navigationInfo: ' + JSON.stringify(navigationInfo));\n    if (navigationInfo !== undefined) {\n      this.pathStack = navigationInfo.pathStack;\n    }\n  }\n  build() {\n    NavDestination() {\n      // ...\n    }.title('PageOne')\n  }\n}"
+        },
+        {
+            "title": "queryRouterPageInfo12+",
+            "description": "queryRouterPageInfo(): RouterPageInfo | undefined;\nObtains a RouterPageInfo instance.\nAtomic service API: This API can be used in atomic services since API version 12.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "import { uiObserver } from '@kit.ArkUI';\n@Entry\n@Component\nstruct MyComponent {\n  aboutToAppear() {\n    let info: uiObserver.RouterPageInfo | undefined = this.queryRouterPageInfo();\n  }\n  build() {\n    // ...\n  }\n}"
+        },
+        {
+            "title": "getDialogController18+",
+            "description": "getDialogController(): PromptActionDialogController | undefined\nObtains a PromptActionDialogController instance.\nAtomic service API: This API can be used in atomic services since API version 18.\nSystem capability: SystemCapability.ArkUI.ArkUI.Full\nReturn value\nExample",
+            "code": "import { BusinessError } from '@kit.BasicServicesKit';\nimport { ComponentContent } from '@kit.ArkUI';\nclass Params {\n  text: string = \"\";\n  constructor(text: string) {\n    this.text = text;\n  }\n}\n@ComponentV2\nstruct MyComponent {\n  build() {\n    Column() {\n      Button('Close Dialog')\n        .onClick(() => {\n          let ctrl: PromptActionDialogController = this.getDialogController();\n          if (ctrl != undefined) {\n            ctrl.close();\n          }\n        })\n    }\n  }\n}\n@Builder\nfunction buildText(params: Params) {\n  Column() {\n    Text(params.text)\n      .fontSize(50)\n      .fontWeight(FontWeight.Bold)\n      .margin({ bottom: 36 })\n    MyComponent()\n  }.backgroundColor('#FFF0F0F0')\n}\n@Entry\n@ComponentV2\nstruct Index {\n  @Local message: string = \"hello\";\n  build() {\n    Row() {\n      Column({ space: 10 }) {\n        Button('click me')\n          .fontSize(20)\n          .onClick(() => {\n            let ctx = this.getUIContext();\n            let promptAction = ctx.getPromptAction();\n            promptAction.openCustomDialog(new ComponentContent(ctx, wrapBuilder(buildText), new Params(this.message)))\n              .catch((err: BusinessError) => {\n                console.error(\"openCustomDialog error: \" + err.code + \" \" + err.message);\n              })\n          })\n      }\n      .width('100%')\n      .height('100%')\n    }\n    .height('100%')\n  }\n}"
+        }
+    ]
+}

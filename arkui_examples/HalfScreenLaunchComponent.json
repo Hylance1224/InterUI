@@ -1,0 +1,12 @@
+{
+    "title": "HalfScreenLaunchComponent",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ohos-atomicservice-halfscreenlaunchcomponent",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to start a top-up service in embedded mode.\nEmbedded atomic services run in separate processes, so their crashes and exceptions are not visible directly in the host's logs. Follow the steps below to view the complete error stack trace during local debugging:",
+            "code": "import { HalfScreenLaunchComponent } from '@kit.ArkUI';\n@Entry\n@Component\nstruct Index {\n  appId: string = \"576****************\"; // Application ID for the atomic service.\n  build() {\n    Column() {\n      HalfScreenLaunchComponent({\n        appId: this.appId,\n        options: {},\n        onTerminated:  (info:TerminationInfo)=> {\n          console.info('onTerminated info = '+ info.want);\n        },\n        onError: (err) => {\n          console.error(\" onError code: \" + err.code + \", message: \", err.message);\n        },\n        onReceive: (data) => {\n          console.info(\"onReceive, data: \" + data['ohos.atomicService.window']);\n        }\n      }) {\n        Column() {\n          Image($r('app.media.app_icon'))\n          Text('Start top-up')\n        }.width(\"80vp\").height(\"80vp\").margin({bottom:30})\n      } // Pass content through the trailing closure.\n    }\n  }\n}"
+        }
+    ]
+}

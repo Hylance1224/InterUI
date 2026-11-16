@@ -1,0 +1,12 @@
+{
+    "title": "CanvasPattern",
+    "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-references/ts-components-canvas-canvaspattern",
+    "example_count": 1,
+    "examples": [
+        {
+            "title": "Example",
+            "description": "This example demonstrates how to apply matrix transformations to a CanvasPattern object using the setTransform API.",
+            "code": "// xxx.ets\n@Entry\n@Component\nstruct CanvasPatternPage {\n  private settings: RenderingContextSettings = new RenderingContextSettings(true);\n  private context: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.settings);\n  private matrix: Matrix2D = new Matrix2D();\n  private img: ImageBitmap = new ImageBitmap(\"common/pattern.jpg\");\n  private pattern: CanvasPattern | null = null;\n  build() {\n      Column() {\n        Button(\"Click to set transform\")\n          .onClick(() => {\n            this.matrix.scaleY = 1\n            this.matrix.scaleX = 1\n            this.matrix.translateX = 50\n            this.matrix.translateY = 200\n            if (this.pattern) {\n              this.pattern.setTransform(this.matrix)\n            }\n            this.context.fillRect(0, 0, 480, 720)\n          })\n          .width(\"45%\")\n          .margin(\"5px\")\n        Canvas(this.context)\n          .width('100%')\n          .height('80%')\n          .backgroundColor('#FFFFFF')\n          .onReady(() => {\n            this.pattern = this.context.createPattern(this.img, 'no-repeat')\n            this.matrix.scaleY = 0.5\n            this.matrix.scaleX = 0.5\n            this.matrix.translateX = 50\n            this.matrix.translateY = 50\n            if (this.pattern) {\n              this.context.fillStyle = this.pattern\n              this.pattern.setTransform(this.matrix)\n            }\n            this.context.fillRect(0, 0, 480, 720)\n          })\n      }\n      .width('100%')\n      .height('100%')\n  }\n}"
+        }
+    ]
+}
